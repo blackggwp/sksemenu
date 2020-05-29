@@ -2,7 +2,7 @@
   "name": "sukishimenu",
   "version": "1.1.0",
   "private": true,
-  "homepage": "http://blackggwp.github.io/sksemenu",
+  "homepage": "http://emenu.sukishigroup.com",
   "dependencies": {
     "antd-mobile": "^2.3.3",
     "bootstrap": "4.3.1",

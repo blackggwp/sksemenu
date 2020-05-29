@@ -12,6 +12,7 @@ import 'antd-mobile/dist/antd-mobile.css';
 import Home from "layouts/Home";
 import Menu from "layouts/Menu";
 import PdfView from "layouts/PdfView";
+import T2 from "layouts/T2";
 
 const hist = createBrowserHistory();
 
@@ -22,6 +23,7 @@ ReactDOM.render(
       <Route exact path="/" render={props => <Home {...props} />} />
       <Route path="/menu" render={props => <Menu {...props} />} />
       <Route path="/pdf" render={props => <PdfView {...props} />} />
+      <Route exact path="/t2" render={props => <T2 {...props} />} />
       <Redirect to="/" />
     </Switch>
   </Router>,

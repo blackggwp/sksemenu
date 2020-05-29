@@ -1,13 +1,13 @@
 import React from 'react'
 import PinchZoomPan from "react-responsive-pinch-zoom-pan";
 import pic from '../assets/img/s.jpg'
-import Nav from '../components/Navbars/Nav'
+import CustomNav from '../components/Navbars/CustomNav'
 
   const Menu = () => {
 
     return (
       <div>
-        <Nav/>
+        <CustomNav/>
         <div>
             <PinchZoomPan
             style={{ zIndex: -1 }}
@@ -16,7 +16,7 @@ import Nav from '../components/Navbars/Nav'
             maxScale= {3}
             doubleTapBehavior='reset'
             >
-                <img alt='Test Image' src={pic} />
+                <img alt='Test' src={pic} />
             </PinchZoomPan>
         </div>
     </div>

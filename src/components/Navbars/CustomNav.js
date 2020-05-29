@@ -2,7 +2,7 @@ import React from 'react'
 import { NavBar, Icon } from 'antd-mobile';
 import { withRouter, Link } from 'react-router-dom';
 
-const Nav = (props) => {
+const CustomNav = (props) => {
 
     return (
 <div>
@@ -14,12 +14,14 @@ const Nav = (props) => {
       zIndex: 100
     }}
       mode="light"
-      icon={<Icon type="left" />}
+      icon={<Icon type="left" 
+      style={{ cursor: 'pointer' }}
+      />}
       onLeftClick={() => props.history.goBack()}
-      rightContent={[
-        <Icon key="0" type="search" style={{ marginRight: '16px' }} />,
-        <Icon key="1" type="ellipsis" />,
-      ]}
+      // rightContent={[
+      //   <Icon key="0" type="search" style={{ marginRight: '16px' }} />,
+      //   <Icon key="1" type="ellipsis" />,
+      // ]}
     >
       <Link to="/">
       Home
@@ -28,4 +30,4 @@ const Nav = (props) => {
   </div>
     )
 }
-export default withRouter(Nav)
+export default withRouter(CustomNav)
