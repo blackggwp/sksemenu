@@ -1,24 +1,29 @@
 import React from 'react'
 import PinchZoomPan from "react-responsive-pinch-zoom-pan";
-import pic from '../assets/img/s.jpg'
-import CustomNav from '../components/Navbars/CustomNav'
 
-  const Menu = () => {
+  const Menu = (props) => {
 
-    return (
-      <div>
-        <CustomNav/>
-        <div>
-            <PinchZoomPan
+    const renderPic = () => {
+      return (
+        <div key="menu-pk1">
+        <PinchZoomPan
             style={{ zIndex: -1 }}
             zoomButtons={false}
             position='center'
             maxScale= {3}
-            doubleTapBehavior='reset'
+            doubleTapBehavior='zoom'
             >
-                <img alt='Test' src={pic} />
+                <img alt="menu-pk1" src={props.pic} />
             </PinchZoomPan>
         </div>
+      )
+    }
+
+    return (
+      <div
+      style={{ marginTop: 100 }}
+      >
+        {renderPic()}
     </div>
     );
 }

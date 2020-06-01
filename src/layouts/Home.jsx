@@ -1,72 +1,73 @@
-import React from "react";
-import { List } from 'antd-mobile';
-import { Row, Col } from "reactstrap";
-import { Link } from "react-router-dom";
+import React, { useState } from "react";
+import { TabContent, TabPane, Nav, NavItem, 
+  NavLink } from 'reactstrap';
+import classnames from 'classnames';
+import Menu from './Menu'
+import pic_normal from '../assets/img/normal/normal_merge_opt.jpg'
+import pic_normal_notopt from '../assets/img/normal/normal_merge.jpg'
 
 const Home = () => {
 
-  const Item = List.Item;
-  const Brief = Item.Brief;
+  const [activeTab, setActiveTab] = useState('1');
+
+  const toggle = tab => {
+    if (activeTab !== tab) setActiveTab(tab);
+  }
 
   return (
-    <>
-      <div className="content">
-        <Row>
-          <Col>
-            <Link to="/menu">
-              <div>
-                <List className="my-list">
-                  <Item arrow="horizontal" multipleLine onClick={() => { }}>
-                    Sukishi New Normal
-          <Brief>
-                      <p></p>
-                      <p></p>
-                      <p></p>
-                    </Brief>
-                  </Item>
-                </List>
-              </div>
-            </Link>
-          </Col>
-        </Row>
-        <Row>
-          <Col>
-            <Link to="/pdf">
-              <div>
-                <List className="my-list">
-                  <Item arrow="horizontal" multipleLine onClick={() => { }}>
-                    Overload Comeback
-          <Brief>
-                      <p></p>
-                      <p></p>
-                      <p></p>
-                    </Brief>
-                  </Item>
-                </List>
-              </div>
-            </Link>
-          </Col>
-        </Row>
-
-        <Row>
-          <Col>
-            <div>
-              <List className="my-list">
-                <Item arrow="horizontal" multipleLine onClick={() => { }}>
-                  Promotion
-          <Brief>
-                    <p></p>
-                    <p></p>
-                    <p></p>
-                  </Brief>
-                </Item>
-              </List>
-            </div>
-          </Col>
-        </Row>
-
+    <div>
+      <div>
+      <Nav tabs sticky="top"
+        style={{ 
+          padding: 10,
+          backgroundColor: 'aliceblue',
+          position: 'fixed',
+          top: 0,
+          width: '100%',
+          zIndex: 100,
+          cursor: 'pointer'
+        }}
+        >
+          <NavItem>
+            <NavLink
+              className={classnames({ active: activeTab === '1' })}
+              onClick={() => { toggle('1'); }}
+            >
+              Sukishi New Normal
+          </NavLink>
+          </NavItem>
+          <NavItem>
+            <NavLink
+              className={classnames({ active: activeTab === '2' })}
+              onClick={() => { toggle('2'); }}
+            >
+              Overload Comeback
+          </NavLink>
+          </NavItem>
+          <NavItem>
+            <NavLink
+              className={classnames({ active: activeTab === '3' })}
+              onClick={() => { toggle('3'); }}
+            >
+              Promotion
+          </NavLink>
+          </NavItem>
+        </Nav>
+        <TabContent activeTab={activeTab}>
+          <TabPane tabId="1">
+            <Menu pic={pic_normal} />
+          </TabPane>
+          <TabPane tabId="2">
+           <h4>Tab 2</h4>
+          <Menu pic={pic_normal_notopt} />
+          </TabPane>
+          <TabPane tabId="3">
+           <h4>Tab 3</h4>
+          </TabPane>
+        </TabContent>
       </div>
-    </>
+
+    </div>
   );
 }
 export default Home
