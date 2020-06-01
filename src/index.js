@@ -23,7 +23,7 @@ ReactDOM.render(
       <Route exact path="/" render={props => <Home {...props} />} />
       <Route path="/menu" render={props => <Menu {...props} />} />
       <Route path="/pdf" render={props => <PdfView {...props} />} />
-      <Route exact path="/t2" render={props => <T2 {...props} />} />
+      <Route path="/t2" render={props => <T2 {...props} />} />
       <Redirect to="/" />
     </Switch>
   </Router>,
