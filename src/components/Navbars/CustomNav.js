@@ -5,13 +5,17 @@ import { withRouter, Link } from 'react-router-dom';
 const CustomNav = (props) => {
 
     return (
-<div>
+<div
+style={{
+  marginBottom: 40
+}}
+>
     <NavBar
     style={{ 
       position: 'fixed',
       top: 0,
       width: '100%',
-      zIndex: 100
+      zIndex: 100,
     }}
       mode="light"
       icon={<Icon type="left" 

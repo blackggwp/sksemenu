@@ -1,11 +1,11 @@
 import React, { useState } from "react";
-import { List } from 'antd-mobile';
 import { Breadcrumb, BreadcrumbItem, 
   TabContent, TabPane, Nav, NavItem, 
   NavLink } from 'reactstrap';
 import classnames from 'classnames';
 import Menu from './Menu'
-import PdfView from './PdfView'
+import pic_pk_normal from '../assets/img/pk/pk_merge_opt.jpg'
+import pic_pk_ovl from '../assets/img/pk/ovl_pk_merge.jpg'
 
 const T2 = () => {
 
@@ -17,7 +17,6 @@ const T2 = () => {
 
   return (
     <div>
-      <hr/>
       <div>
         <Breadcrumb>
           <BreadcrumbItem active>Tier 2</BreadcrumbItem>
@@ -25,13 +24,24 @@ const T2 = () => {
       </div>
 
       <div>
-        <Nav tabs>
+        <Nav tabs sticky="top"
+        style={{ 
+          padding: 10,
+          backgroundColor: 'aliceblue',
+          position: 'fixed',
+          top: 0,
+          width: '100%',
+          zIndex: 100,
+          cursor: 'pointer'
+        }}
+        >
           <NavItem>
             <NavLink
               className={classnames({ active: activeTab === '1' })}
               onClick={() => { toggle('1'); }}
             >
-              Sukishi New Normal
+              <p>Sukishi New Normal</p>
+              <p>(A la carte)</p>
           </NavLink>
           </NavItem>
           <NavItem>
@@ -39,7 +49,8 @@ const T2 = () => {
               className={classnames({ active: activeTab === '2' })}
               onClick={() => { toggle('2'); }}
             >
-              Overload Comeback
+              <p>Sukishi สุข Overload</p>
+              <p>(All you can eat)</p>
           </NavLink>
           </NavItem>
           <NavItem>
@@ -53,13 +64,13 @@ const T2 = () => {
         </Nav>
         <TabContent activeTab={activeTab}>
           <TabPane tabId="1">
-            <Menu/>
+            <Menu pic={pic_pk_normal} />
           </TabPane>
           <TabPane tabId="2">
-           <PdfView/>
+           <Menu pic={pic_pk_ovl} />
           </TabPane>
           <TabPane tabId="3">
-            <Menu/>
+           <h4>Tab 3</h4>
           </TabPane>
         </TabContent>
       </div>

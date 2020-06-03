@@ -1,24 +1,36 @@
 import React from 'react'
 import PinchZoomPan from "react-responsive-pinch-zoom-pan";
-import pic from '../assets/img/s.jpg'
 import CustomNav from '../components/Navbars/CustomNav'
+import { Button, Breadcrumb, BreadcrumbItem } from 'reactstrap';
 
-  const Menu = () => {
+  const Menu = (props) => {
 
-    return (
-      <div>
-        <CustomNav/>
-        <div>
-            <PinchZoomPan
+    const renderPic = () => {
+      return (
+        <div key="menu-pk1">
+        <PinchZoomPan
             style={{ zIndex: -1 }}
             zoomButtons={false}
             position='center'
             maxScale= {3}
-            doubleTapBehavior='reset'
+            doubleTapBehavior='zoom'
             >
-                <img alt='Test' src={pic} />
+                <img alt="menu-pk1" src={props.location.pic} />
             </PinchZoomPan>
         </div>
+      )
+    }
+
+    return (
+      <div>
+          <CustomNav/>
+          <div>
+        <Breadcrumb>
+          <BreadcrumbItem active>{props.location.headerText}</BreadcrumbItem>
+        </Breadcrumb>
+      </div>
+        {renderPic()}
+        <Button color="primary" size="lg" onClick={() => props.history.goBack()} block>Back</Button>
     </div>
     );
 }

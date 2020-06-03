@@ -9,10 +9,32 @@ import "assets/demo/demo.css";
 import "perfect-scrollbar/css/perfect-scrollbar.css";
 import 'antd-mobile/dist/antd-mobile.css';
 // import AdminLayout from "layouts/Admin.jsx";
-import Home from "layouts/Home";
+//import Home from "layouts/Home";
 import Menu from "layouts/Menu";
-import PdfView from "layouts/PdfView";
-import T2 from "layouts/T2";
+import HomeOld from "layouts/HomeOld";
+
+import pic_normal from './assets/img/normal/normal_merge_opt.jpg'
+import pic_ovl from './assets/img/normal/ovl_normal_merge_opt.jpg'
+import pic_promotion from './assets/img/normal/normal_promotion_opt.jpg'
+
+import pic_pk_new from './assets/img/pk/pk_new_merge_opt.jpg'
+import pic_pk_ovl from './assets/img/pk/ovl_pk_merge.jpg'
+import pic_pk_promotion from './assets/img/pk/pk_promotion_opt.jpg'
+import PrivateRoute from "helpers/PrivateRoute";
+
+const propsHome = {
+  "pic_normal": pic_normal,
+  "pic_ovl": pic_ovl,
+  "pic_promotion": pic_promotion,
+  "headerText": "Tier1"
+}
+
+const propsT2 = {
+  "pic_normal": pic_pk_new,
+  "pic_ovl": pic_pk_ovl,
+  "pic_promotion": pic_pk_promotion,
+  "headerText": "Tier2"
+}
 
 const hist = createBrowserHistory();
 
@@ -20,10 +42,9 @@ ReactDOM.render(
   
   <Router history={hist}>
     <Switch>
-      <Route exact path="/" render={props => <Home {...props} />} />
-      <Route path="/menu" render={props => <Menu {...props} />} />
-      <Route path="/pdf" render={props => <PdfView {...props} />} />
-      <Route path="/t2" render={props => <T2 {...props} />} />
+      <Route exact path="/" render={props => <HomeOld forRender={propsHome} {...props} />} />
+      <PrivateRoute path="/menu" render={props => <Menu {...props} />} />
+      <Route path="/t2" render={props => <HomeOld forRender={propsT2} {...props} />} />
       <Redirect to="/" />
     </Switch>
   </Router>,
