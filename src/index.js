@@ -12,25 +12,19 @@ import 'antd-mobile/dist/antd-mobile.css';
 //import Home from "layouts/Home";
 import Menu from "layouts/Menu";
 import HomeOld from "layouts/HomeOld";
-
-import pic_normal from './assets/img/normal/normal_merge_opt.jpg'
-import pic_ovl from './assets/img/normal/ovl_normal_merge_opt.jpg'
-import pic_promotion from './assets/img/normal/normal_promotion_opt.jpg'
-
-import pic_pk_new from './assets/img/pk/pk_new_merge_opt.jpg'
-import pic_pk_ovl from './assets/img/pk/ovl_pk_merge.jpg'
-import pic_pk_promotion from './assets/img/pk/pk_promotion_opt.jpg'
 import PrivateRoute from "helpers/PrivateRoute";
 
+import { pic_normal_nm, pic_normal_ovl, pic_normal_promotion, pic_pk_nm, pic_pk_ovl, pic_pk_promotion } from './Menu_Data'
+
 const propsHome = {
-  "pic_normal": pic_normal,
-  "pic_ovl": pic_ovl,
-  "pic_promotion": pic_promotion,
+  "pic_normal": pic_normal_nm,
+  "pic_ovl": pic_normal_ovl,
+  "pic_promotion": pic_normal_promotion,
   "headerText": "Tier1"
 }
 
 const propsT2 = {
-  "pic_normal": pic_pk_new,
+  "pic_normal": pic_pk_nm,
   "pic_ovl": pic_pk_ovl,
   "pic_promotion": pic_pk_promotion,
   "headerText": "Tier2"
