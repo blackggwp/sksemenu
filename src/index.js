@@ -9,9 +9,9 @@ import "assets/demo/demo.css";
 import "perfect-scrollbar/css/perfect-scrollbar.css";
 import 'antd-mobile/dist/antd-mobile.css';
 // import AdminLayout from "layouts/Admin.jsx";
-//import Home from "layouts/Home";
+import Home from "layouts/Home";
 import Menu from "layouts/Menu";
-import HomeOld from "layouts/HomeOld";
+// import HomeOld from "layouts/HomeOld";
 import PrivateRoute from "helpers/PrivateRoute";
 
 import { pic_normal_nm, pic_normal_ovl, pic_normal_promotion, pic_pk_nm, pic_pk_ovl, pic_pk_promotion } from './Menu_Data'
@@ -36,9 +36,9 @@ ReactDOM.render(
   
   <Router history={hist}>
     <Switch>
-      <Route exact path="/" render={props => <HomeOld forRender={propsHome} {...props} />} />
+      <Route exact path="/" render={props => <Home forRender={propsHome} {...props} />} />
       <PrivateRoute path="/menu" render={props => <Menu {...props} />} />
-      <Route path="/t2" render={props => <HomeOld forRender={propsT2} {...props} />} />
+      <Route path="/t2" render={props => <Home forRender={propsT2} {...props} />} />
       <Redirect to="/" />
     </Switch>
   </Router>,

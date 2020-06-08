@@ -1,8 +1,11 @@
 import React, { useState } from "react";
-import { TabContent, TabPane, Nav, NavItem, 
-  NavLink, Breadcrumb, BreadcrumbItem, Button } from 'reactstrap';
+import {
+  TabContent, TabPane, Nav, NavItem,
+  NavLink, Breadcrumb, BreadcrumbItem, Button
+} from 'reactstrap';
 import classnames from 'classnames';
 import Menu from './Menu'
+import PdfView from "./PdfView";
 
 const Home = (props) => {
 
@@ -11,16 +14,6 @@ const Home = (props) => {
   const toggle = tab => {
     if (activeTab !== tab) setActiveTab(tab);
   }
-  const topFunction = () => {
-    document.body.scrollTop = 0;
-    document.documentElement.scrollTop = 0;
-  }
-
-  // function scrolled(e) {
-  //   if (myDiv.offsetHeight + myDiv.scrollTop >= myDiv.scrollHeight) {
-  //     scrolledToBottom(e);
-  //   }
-  // }
   const navItemsStyle = {
     border: '2px solid brown',
     borderRadius: 5,
@@ -34,38 +27,38 @@ const Home = (props) => {
         </Breadcrumb>
       </div>
       <div>
-      <Nav tabs sticky="top"
-        style={{ 
-          padding: 10,
-          position: 'fixed',
-          backgroundColor: 'wheat',
-          top: 0,
-          width: '100%',
-          zIndex: 100,
-          cursor: 'pointer',
-          display: 'block'
-        }}
+        <Nav tabs sticky="top"
+          style={{
+            // padding: 10,
+            // position: 'fixed',
+            // backgroundColor: 'wheat',
+            // top: 0,
+            // width: '100%',
+            // zIndex: 100,
+            cursor: 'pointer',
+            // display: 'block'
+          }}
         >
-          <NavItem style={navItemsStyle}>
+          <NavItem>
             <NavLink
               className={classnames({ active: activeTab === '1' })}
               onClick={() => { toggle('1'); }}
             >
-              
+
               <p>Sukishi สุข Overload</p>
               <p>(All you can eat)</p>
-          </NavLink>
+            </NavLink>
           </NavItem>
-          <NavItem style={navItemsStyle}>
+          <NavItem>
             <NavLink
               className={classnames({ active: activeTab === '2' })}
               onClick={() => { toggle('2'); }}
             >
               <p>Sukishi New Normal</p>
               <p>(A la carte)</p>
-          </NavLink>
+            </NavLink>
           </NavItem>
-          <NavItem style={navItemsStyle}>
+          <NavItem>
             <NavLink
               className={classnames({ active: activeTab === '3' })}
               onClick={() => { toggle('3'); }}
@@ -76,27 +69,35 @@ const Home = (props) => {
         </Nav>
         <TabContent activeTab={activeTab}>
           <TabPane tabId="1">
-            <Menu pic={props.forRender.pic_ovl} />
+            <Menu 
+            pic={props.forRender.pic_ovl}
+            headerText= {props.forRender.headerText}
+             />
           </TabPane>
           <TabPane tabId="2">
-          <Menu pic={props.forRender.pic_normal} />
+            <Menu 
+            pic={props.forRender.pic_normal}
+            headerText= {props.forRender.headerText}
+             />
           </TabPane>
           <TabPane tabId="3">
-          <Menu pic={props.forRender.pic_promotion} />
+            <Menu 
+            pic={props.forRender.pic_promotion}
+            headerText= {props.forRender.headerText}
+             />
           </TabPane>
         </TabContent>
       </div>
       <div
-      style={{
-        float: 'right',
-        zIndex: 99,
-        position: 'fixed',
-        bottom: 0,
-        right: 0,
-        marginRight: 20
-      }}
+        style={{
+          float: 'right',
+          zIndex: 99,
+          position: 'fixed',
+          bottom: 0,
+          right: 0,
+          marginRight: 20
+        }}
       >
-        {/* <Button color="primary" id="gotopbtn" onClick={() => topFunction()}>Back to top</Button> */}
       </div>
     </div>
   );

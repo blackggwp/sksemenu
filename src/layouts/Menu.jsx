@@ -1,49 +1,46 @@
 import React from 'react'
+import { useState } from 'react';
 import PinchZoomPan from "react-responsive-pinch-zoom-pan";
-import CustomNav from '../components/Navbars/CustomNav'
+// import CustomNav from '../components/Navbars/CustomNav'
 import { Button, Breadcrumb, BreadcrumbItem } from 'reactstrap';
 
 import "react-image-gallery/styles/css/image-gallery.css";
 
-import ImageGallery from 'react-image-gallery';
+// import ImageGallery from 'react-image-gallery';
+import Lightbox from 'react-image-lightbox';
+import 'react-image-lightbox/style.css';
 
   const Menu = (props) => {
+    const [currentPic, setCurrentPic] = useState('');
+    const [isOpen, setIsOpen] = useState(false);
 
-    // const renderPic = () => {
-    //   return (
-    //     <div key="menu-pk1">
-    //     <PinchZoomPan
-    //         style={{ zIndex: -1 }}
-    //         zoomButtons={false}
-    //         position='center'
-    //         maxScale= {3}
-    //         doubleTapBehavior='zoom'
-    //         >
-    //             <img alt="menu-pk1" src={props.location.pic} />
-    //         </PinchZoomPan>
-    //     </div>
-    //   )
-    // }
+    const renderPic = (pic) => {
+      return (
+        <div key={pic.original}>
+            <img src={pic.original} alt="img"
+            onClick={() => {
+              setIsOpen(true)
+              setCurrentPic(pic.original)
+            }}
+            />
+        </div>
+      )
+    }
 
     return (
       <div>
-          <CustomNav/>
           <div>
-        <Breadcrumb>
-          <BreadcrumbItem active>{props.location.headerText}</BreadcrumbItem>
-        </Breadcrumb>
       </div>
 
-      <ImageGallery items={props.location.pic} 
-      lazyLoad={true}
-      showFullscreenButton={false}
-      showPlayButton={false}
-      slideDuration={100}
-      showIndex={true}
-      />
-
-        {/* {renderPic()} */}
-        <Button color="primary" size="lg" onClick={() => props.history.goBack()} block>Back</Button>
+      <div>
+        {isOpen && (
+          <Lightbox
+            mainSrc={currentPic}
+            onCloseRequest={() => setIsOpen(false)}
+          />
+        )}
+      </div>
+        {props.pic.map(pic => renderPic(pic))}
     </div>
     );
 }

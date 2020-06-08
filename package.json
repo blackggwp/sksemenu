@@ -19,6 +19,7 @@
     "react-google-maps": "9.4.5",
     "react-helmet": "^6.0.0",
     "react-image-gallery": "^1.0.7",
+    "react-image-lightbox": "^5.1.1",
     "react-native-transformable-image": "0.0.18",
     "react-notification-alert": "0.0.12",
     "react-pinch-and-zoom": "^1.2.5",
