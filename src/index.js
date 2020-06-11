@@ -13,6 +13,7 @@ import Home from "layouts/Home";
 import Menu from "layouts/Menu";
 // import HomeOld from "layouts/HomeOld";
 import PrivateRoute from "helpers/PrivateRoute";
+import Test from './helpers/Test'
 
 import { pic_normal_nm, pic_normal_ovl, pic_normal_promotion, pic_pk_nm, pic_pk_ovl, pic_pk_promotion } from './Menu_Data'
 

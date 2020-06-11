@@ -5,6 +5,7 @@
   "homepage": "http://emenu.sukishigroup.com",
   "proxy": "http://localhost:8002",
   "dependencies": {
+    "@material-ui/core": "^4.10.1",
     "antd-mobile": "^2.3.3",
     "bootstrap": "4.3.1",
     "chart.js": "2.8.0",
@@ -13,6 +14,7 @@
     "node-sass": "4.12.0",
     "pdf-viewer-reactjs": "^2.0.6",
     "perfect-scrollbar": "1.4.0",
+    "prop-types": "^15.7.2",
     "react": "16.8.6",
     "react-chartjs-2": "2.7.6",
     "react-dom": "16.8.6",

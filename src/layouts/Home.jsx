@@ -1,105 +1,98 @@
-import React, { useState } from "react";
-import {
-  TabContent, TabPane, Nav, NavItem,
-  NavLink, Breadcrumb, BreadcrumbItem, Button
-} from 'reactstrap';
-import classnames from 'classnames';
-import Menu from './Menu'
-import PdfView from "./PdfView";
+import React from 'react';
+import PropTypes from 'prop-types';
+import { makeStyles } from '@material-ui/core/styles';
+import AppBar from '@material-ui/core/AppBar';
+import Tabs from '@material-ui/core/Tabs';
+import Tab from '@material-ui/core/Tab';
+import Typography from '@material-ui/core/Typography';
+import Box from '@material-ui/core/Box';
+import Menu from './Menu';
 
-const Home = (props) => {
+function TabPanel(props) {
+  const { children, value, index, ...other } = props;
 
-  const [activeTab, setActiveTab] = useState('1');
-
-  const toggle = tab => {
-    if (activeTab !== tab) setActiveTab(tab);
-  }
-  const navItemsStyle = {
-    border: '2px solid brown',
-    borderRadius: 5,
-    margin: '2px'
-  }
   return (
-    <div>
-      <div>
-        <Breadcrumb>
-          <BreadcrumbItem active>{props.forRender.headerText}</BreadcrumbItem>
-        </Breadcrumb>
-      </div>
-      <div>
-        <Nav tabs sticky="top"
-          style={{
-            // padding: 10,
-            // position: 'fixed',
-            // backgroundColor: 'wheat',
-            // top: 0,
-            // width: '100%',
-            // zIndex: 100,
-            cursor: 'pointer',
-            // display: 'block'
-          }}
-        >
-          <NavItem>
-            <NavLink
-              className={classnames({ active: activeTab === '1' })}
-              onClick={() => { toggle('1'); }}
-            >
-
-              <p>Sukishi สุข Overload</p>
-              <p>(All you can eat)</p>
-            </NavLink>
-          </NavItem>
-          <NavItem>
-            <NavLink
-              className={classnames({ active: activeTab === '2' })}
-              onClick={() => { toggle('2'); }}
-            >
-              <p>Sukishi New Normal</p>
-              <p>(A la carte)</p>
-            </NavLink>
-          </NavItem>
-          <NavItem>
-            <NavLink
-              className={classnames({ active: activeTab === '3' })}
-              onClick={() => { toggle('3'); }}
-            >
-              Promotion
-          </NavLink>
-          </NavItem>
-        </Nav>
-        <TabContent activeTab={activeTab}>
-          <TabPane tabId="1">
-            <Menu 
-            pic={props.forRender.pic_ovl}
-            headerText= {props.forRender.headerText}
-             />
-          </TabPane>
-          <TabPane tabId="2">
-            <Menu 
-            pic={props.forRender.pic_normal}
-            headerText= {props.forRender.headerText}
-             />
-          </TabPane>
-          <TabPane tabId="3">
-            <Menu 
-            pic={props.forRender.pic_promotion}
-            headerText= {props.forRender.headerText}
-             />
-          </TabPane>
-        </TabContent>
-      </div>
-      <div
-        style={{
-          float: 'right',
-          zIndex: 99,
-          position: 'fixed',
-          bottom: 0,
-          right: 0,
-          marginRight: 20
-        }}
-      >
-      </div>
+    <div
+      role="tabpanel"
+      hidden={value !== index}
+      id={`wrapped-tabpanel-${index}`}
+      aria-labelledby={`wrapped-tab-${index}`}
+      {...other}
+    >
+      {value === index && (
+        <Box p={3}>
+          <Typography>{children}</Typography>
+        </Box>
+      )}
     </div>
   );
 }
-export default Home
+
+TabPanel.propTypes = {
+  children: PropTypes.node,
+  index: PropTypes.any.isRequired,
+  value: PropTypes.any.isRequired,
+};
+
+function a11yProps(index) {
+  return {
+    id: `wrapped-tab-${index}`,
+    'aria-controls': `wrapped-tabpanel-${index}`,
+  };
+}
+
+const useStyles = makeStyles((theme) => ({
+  root: {
+    flexGrow: 1,
+    backgroundColor: theme.palette.background.paper,
+  },
+}));
+
+export default function TabsWrappedLabel(props) {
+  const classes = useStyles();
+  const [value, setValue] = React.useState('one');
+
+  const handleChange = (event, newValue) => {
+    setValue(newValue);
+  };
+
+  return (
+    <div className={classes.root}>
+      <AppBar position="static">
+        <Tabs value={value} 
+        onChange={handleChange} 
+        aria-label="wrapped "
+          variant="fullWidth"
+          >
+          <Tab
+            value="one"
+            label="Sukishi สุข Overload (All you can eat)"
+            wrapped
+            {...a11yProps('one')}
+          />
+          <Tab value="two" label="Sukishi New Normal (A la carte)" 
+          wrapped {...a11yProps('two')} />
+          <Tab value="three" label="Promotion" {...a11yProps('three')} />
+        </Tabs>
+      </AppBar>
+      <TabPanel value={value} forRender={props.forRender} index="one">
+        <Menu
+        pic={props.forRender.pic_ovl}
+        headerText={props.forRender.headerText}
+        />
+      </TabPanel>
+      <TabPanel value={value} forRender={props.forRender} index="two">
+        <Menu
+        pic={props.forRender.pic_normal}
+        headerText={props.forRender.headerText}
+        />
+      </TabPanel>
+      <TabPanel value={value} forRender={props.forRender} index="three">
+        <Menu
+        pic={props.forRender.pic_promotion}
+        headerText={props.forRender.headerText}
+        />
+      </TabPanel>
+    </div>
+  );
+}
