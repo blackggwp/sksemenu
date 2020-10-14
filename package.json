@@ -9,8 +9,12 @@
     "antd-mobile": "^2.3.3",
     "bootstrap": "4.3.1",
     "chart.js": "2.8.0",
+    "enzyme": "^3.11.0",
+    "enzyme-adapter-react-16": "^1.15.2",
     "history": "4.9.0",
     "http-proxy-middleware": "^1.0.4",
+    "next": "^9.4.4",
+    "next-images": "^1.4.0",
     "node-sass": "4.12.0",
     "pdf-viewer-reactjs": "^2.0.6",
     "perfect-scrollbar": "1.4.0",
@@ -42,7 +46,10 @@
     "map-sass": "node-sass src/assets/scss/paper-dashboard.scss src/assets/css/paper-dashboard.css --source-map true",
     "predeploy": "npm run build",
     "deploy": "gh-pages -d build",
-    "server": "node ftp.js"
+    "server": "node ftp.js",
+    "next dev": "next",
+    "next build": "next build",
+    "next start": "next start"
   },
   "eslintConfig": {
     "extends": "react-app"
@@ -63,6 +70,7 @@
   },
   "devDependencies": {
     "ftp-deploy": "^2.3.7",
-    "gh-pages": "^2.2.0"
+    "gh-pages": "^2.2.0",
+    "jest": "24.7.1"
   }
 }
