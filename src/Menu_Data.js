@@ -27,18 +27,18 @@ import pic_pk_ovl6 from './assets/img/pk/pk_ovl6.jpg'
 import pic_pk_promotion1 from './assets/img/pk/pk_promotion_opt.jpg'
 
 export const pic_normal_promotion = [
-    {
-        original: pic_normal_promotion1,
-        thumbnail: pic_normal_promotion1
-    },
-    
+  {
+    original: pic_normal_promotion1,
+    thumbnail: pic_normal_promotion1
+  },
+
 ]
 export const pic_pk_promotion = [
-    {
-        original: pic_pk_promotion1,
-        thumbnail: pic_pk_promotion1
-    },
-    
+  {
+    original: pic_pk_promotion1,
+    thumbnail: pic_pk_promotion1
+  },
+
 ]
 
 export const pic_normal_nm = [
@@ -58,7 +58,7 @@ export const pic_normal_nm = [
     original: pic_normal_nm4,
     thumbnail: pic_normal_nm4,
   },
-  
+
 ];
 
 export const pic_normal_ovl = [
@@ -86,7 +86,7 @@ export const pic_normal_ovl = [
     original: pic_normal_ovl6,
     thumbnail: pic_normal_ovl6,
   },
-  
+
 ];
 
 export const pic_pk_nm = [
@@ -106,7 +106,7 @@ export const pic_pk_nm = [
     original: pic_pk_nm4,
     thumbnail: pic_pk_nm4,
   },
-  
+
 ];
 
 export const pic_pk_ovl = [
@@ -134,5 +134,5 @@ export const pic_pk_ovl = [
     original: pic_pk_ovl6,
     thumbnail: pic_pk_ovl6,
   },
-  
+
 ];
