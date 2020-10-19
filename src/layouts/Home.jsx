@@ -21,7 +21,8 @@ function TabPanel(props) {
     >
       {value === index && (
         <Box p={3}>
-          <Typography>{children}</Typography>
+          {/* <Typography>{children}</Typography> */}
+          <Typography component={'span'} variant={'body2'}>{children}</Typography>
         </Box>
       )}
     </div>
@@ -51,6 +52,7 @@ const useStyles = makeStyles((theme) => ({
 export default function TabsWrappedLabel(props) {
   const classes = useStyles();
   const [value, setValue] = React.useState('one');
+  const { forRender } = props;
 
   const handleChange = (event, newValue) => {
     setValue(newValue);
@@ -59,38 +61,38 @@ export default function TabsWrappedLabel(props) {
   return (
     <div className={classes.root}>
       <AppBar position="static">
-        <Tabs value={value} 
-        onChange={handleChange} 
-        aria-label="wrapped "
+        <Tabs value={value}
+          onChange={handleChange}
+          aria-label="wrapped "
           variant="fullWidth"
-          >
+        >
           <Tab
             value="one"
             label="Sukishi สุข Overload (All you can eat)"
             wrapped
             {...a11yProps('one')}
           />
-          <Tab value="two" label="Sukishi New Normal (A la carte)" 
-          wrapped {...a11yProps('two')} />
+          <Tab value="two" label="Sukishi New Normal (A la carte)"
+            wrapped {...a11yProps('two')} />
           <Tab value="three" label="Promotion" {...a11yProps('three')} />
         </Tabs>
       </AppBar>
-      <TabPanel value={value} forRender={props.forRender} index="one">
+      <TabPanel value={value} index="one">
         <Menu
-        pic={props.forRender.pic_ovl}
-        headerText={props.forRender.headerText}
+          pic={forRender.pic_ovl}
+          headerText={forRender.headerText}
         />
       </TabPanel>
-      <TabPanel value={value} forRender={props.forRender} index="two">
+      <TabPanel value={value} index="two">
         <Menu
-        pic={props.forRender.pic_normal}
-        headerText={props.forRender.headerText}
+          pic={forRender.pic_normal}
+          headerText={forRender.headerText}
         />
       </TabPanel>
-      <TabPanel value={value} forRender={props.forRender} index="three">
+      <TabPanel value={value} index="three">
         <Menu
-        pic={props.forRender.pic_promotion}
-        headerText={props.forRender.headerText}
+          pic={forRender.pic_promotion}
+          headerText={forRender.headerText}
         />
       </TabPanel>
     </div>
