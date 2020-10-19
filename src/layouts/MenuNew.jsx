@@ -19,11 +19,14 @@ const Menu = (props) => {
   useEffect(() => {
     let lists = []
     switch (brandid) {
-      case 'bq':
-        lists = importAll(require.context(`./../assets/img/bq/`, true, /\.(png|jpe?g|svg)$/));
+      case 'bq_ovl':
+        lists = importAll(require.context(`./../assets/img/bq_ovl/`, true, /\.(png|jpe?g|svg)$/));
         break;
       case 'bf':
         lists = importAll(require.context(`./../assets/img/bf/`, true, /\.(png|jpe?g|svg)$/));
+        break;
+      case 'sg':
+        lists = importAll(require.context(`./../assets/img/sg/`, true, /\.(png|jpe?g|svg)$/));
         break;
       default:
         break;
