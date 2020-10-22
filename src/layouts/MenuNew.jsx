@@ -5,6 +5,7 @@ import { useState, useEffect } from 'react';
 import "react-image-gallery/styles/css/image-gallery.css";
 import Lightbox from 'react-image-lightbox';
 import 'react-image-lightbox/style.css';
+import Page404 from './Page404';
 
 const Menu = (props) => {
   const [currentPic, setCurrentPic] = useState('');
@@ -29,10 +30,13 @@ const Menu = (props) => {
         lists = importAll(require.context(`./../../public/img/sg/`, true, /\.(png|jpe?g|svg)$/));
         break;
       default:
+        lists = false
         break;
     }
     setPic(lists)
   }, [brandid])
+
+  if (!pic) return <Page404 />
 
   const renderPic = (pic) => {
     return (
