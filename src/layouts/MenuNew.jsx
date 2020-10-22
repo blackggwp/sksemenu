@@ -20,13 +20,13 @@ const Menu = (props) => {
     let lists = []
     switch (brandid) {
       case 'bq_ovl':
-        lists = importAll(require.context(`./../assets/img/bq_ovl/`, true, /\.(png|jpe?g|svg)$/));
+        lists = importAll(require.context(`./../../public/img/bq_ovl/`, true, /\.(png|jpe?g|svg)$/));
         break;
       case 'bf':
-        lists = importAll(require.context(`./../assets/img/bf/`, true, /\.(png|jpe?g|svg)$/));
+        lists = importAll(require.context(`./../../public/img/bf/`, true, /\.(png|jpe?g|svg)$/));
         break;
       case 'sg':
-        lists = importAll(require.context(`./../assets/img/sg/`, true, /\.(png|jpe?g|svg)$/));
+        lists = importAll(require.context(`./../../public/img/sg/`, true, /\.(png|jpe?g|svg)$/));
         break;
       default:
         break;
