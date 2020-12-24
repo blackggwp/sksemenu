@@ -29,6 +29,9 @@ const Menu = (props) => {
       case 'sg':
         lists = importAll(require.context(`./../../public/img/sg/`, true, /\.(png|jpe?g|svg)$/));
         break;
+      case 'delivery':
+        lists = importAll(require.context(`./../../public/img/delivery/`, true, /\.(png|jpe?g|svg)$/));
+        break;
       default:
         lists = false
         break;
