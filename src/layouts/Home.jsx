@@ -49,7 +49,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function TabsWrappedLabel(props) {
+export default function Home(props) {
   const classes = useStyles();
   const [value, setValue] = React.useState('one');
   const { forRender } = props;

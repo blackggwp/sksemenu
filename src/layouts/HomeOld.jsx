@@ -3,7 +3,7 @@ import { List } from 'antd-mobile';
 import { Row, Col } from "reactstrap";
 import { Link } from "react-router-dom";
 
-const Home = (props) => {
+const HomeOld = (props) => {
 
   const Item = List.Item;
   const Brief = Item.Brief;
@@ -76,4 +76,4 @@ const Home = (props) => {
     </>
   );
 }
-export default Home
+export default HomeOld
