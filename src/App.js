@@ -20,20 +20,24 @@ const hist = createBrowserHistory();
 
 function App() {
   return (
-    <Router history={hist}>
+    // <Router history={hist}>
+    <Router history={hist} basename={"/test"}>
       <Switch>
         {/* <Route exact path="/" render={props => <Home forRender={propsHome} {...props} />} /> */}
         <Route
           exact
-          path="/t2"
+          // path="/t2"
+          path={`${process.env.PUBLIC_URL}/t2`}
           render={(props) => <HomeOld forRender={propsT2} {...props} />}
         />
         <Route
-          path="/menu/:brandid"
+          // path="/menu/:brandid"
+          path={`${process.env.PUBLIC_URL}/menu/:brandid`}
           render={(props) => <HomeNew {...props} />}
         />
         <Route
-          path="/catalogue/:brandid"
+          // path="/catalogue/:brandid"
+          path={`${process.env.PUBLIC_URL}/catalogue/:brandid`}
           render={(props) => <Home3 {...props} />}
         />
         <Route component={Page404} />

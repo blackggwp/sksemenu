@@ -53,7 +53,7 @@ const MenuNew = (props) => {
     setPic(lists)
   }, [brandid])
 
-  if (!pic) return <p>Now Loading...</p>
+  if (!pic) return <Typography variant="h4">Now loading...</Typography>
 
   const renderPic = (pic) => {
     return (
@@ -68,7 +68,7 @@ const MenuNew = (props) => {
               }}
             />)
           :
-          <Typography>Now loading...</Typography>
+        <Typography variant="h4">Now loading...</Typography>
         }
       </div>
     )
