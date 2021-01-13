@@ -2,7 +2,7 @@
   "name": "sukishimenu",
   "version": "1.1.0",
   "private": true,
-  "homepage": "http://emenu.sukishigroup.com/test",
+  "homepage": "http://emenu.sukishigroup.com",
   "dependencies": {
     "@material-ui/core": "^4.10.1",
     "antd-mobile": "^2.3.3",

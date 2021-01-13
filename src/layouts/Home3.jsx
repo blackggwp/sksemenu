@@ -56,11 +56,12 @@ export default function Home3() {
   let { brandid } = useParams()
   const [value, setValue] = React.useState('one');
   const [isS81, setIsS81] = React.useState(false);
-  
-  
+
+
   useEffect(() => {
-    if(brandid === 's81') {
+    if (brandid === 'bq-huahin') {
       setIsS81(true)
+      setValue("two")
     }
   }, [brandid])
 
@@ -71,26 +72,28 @@ export default function Home3() {
   return (
     <div className={classes.root}>
       <AppBar position="static">
-        <Tabs value={value} 
-        variant="fullWidth"
-        onChange={handleChange} aria-label="wrapped label tabs example">
-          <Tab
-            value="one"
-            label="Overload"
-            wrapped
-            {...a11yProps('one')}
-          />
-          {!isS81 && <Tab value="two" label="A lacarte" {...a11yProps('two')} /> }
+        <Tabs value={value}
+          variant="fullWidth"
+          onChange={handleChange} aria-label="wrapped label tabs example">
+          {!isS81 &&
+            <Tab
+              value="one"
+              label="Overload"
+              wrapped
+              {...a11yProps('one')}
+            />
+          }
+          <Tab value="two" label="A lacarte" {...a11yProps('two')} />
         </Tabs>
       </AppBar>
-      <TabPanel value={value} index="one">
+      {!isS81 &&
+        <TabPanel value={value} index="one">
+          <MenuNew brandid={`${brandid}-ovl`} />
+        </TabPanel>
+      }
+      <TabPanel value={value} index="two">
         <MenuNew brandid={`${brandid}-alc`} />
       </TabPanel>
-      {!isS81 &&
-      <TabPanel value={value} index="two">
-      <MenuNew brandid={`${brandid}-ovl`} />
-      </TabPanel>
-      }
     </div>
   );
 }

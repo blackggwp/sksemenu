@@ -31,19 +31,19 @@ const MenuNew = (props) => {
       case 'delivery':
         lists = importAll(require.context(`./../../public/img/delivery/`, true, /\.(png|jpe?g|svg)$/));
         break;
-        case 'bq-main-alc':
+      case 'bq-main-alc':
         lists = importAll(require.context(`./../../public/img/catalogue/bq-alc/`, true, /\.(png|jpe?g|svg)$/));
         break;
       case 'bq-main-ovl':
         lists = importAll(require.context(`./../../public/img/catalogue/bq-ovl/`, true, /\.(png|jpe?g|svg)$/));
         break;
-        case 's41-alc':
+      case 'bq-phuket-alc':
         lists = importAll(require.context(`./../../public/img/catalogue/s41-alc/`, true, /\.(png|jpe?g|svg)$/));
         break;
-      case 's41-ovl':
+      case 'bq-phuket-ovl':
         lists = importAll(require.context(`./../../public/img/catalogue/s41-ovl/`, true, /\.(png|jpe?g|svg)$/));
         break;
-        case 's81-alc':
+      case 'bq-huahin-alc':
         lists = importAll(require.context(`./../../public/img/catalogue/s81-alc/`, true, /\.(png|jpe?g|svg)$/));
         break;
       default:
@@ -68,7 +68,7 @@ const MenuNew = (props) => {
               }}
             />)
           :
-        <Typography variant="h4">Now loading...</Typography>
+          <Typography variant="h4">Now loading...</Typography>
         }
       </div>
     )
