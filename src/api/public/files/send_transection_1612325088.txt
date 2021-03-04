@@ -1,0 +1,14 @@
+array (
+  'first_name' => '',
+  'last_name' => '',
+  'mobile' => '0901975612',
+  'transaction_no' => 'T011210200129',
+  'note' => '',
+  'amount' => '400',
+  'outletcode' => 'T01',
+  'empcode' => 'E-0000',
+  'tablecode' => '905',
+  'systemdate' => '2/3/2021 11:04:15 AM',
+  'programdate' => '03/02/2021 0:00:00',
+  'tag' => 'send_transection',
+)
