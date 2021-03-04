@@ -1,65 +1,31 @@
 var express = require('express');
 var fs = require('fs');
 var path = require('path');
-var { joinCols, joinVal, combineObj } = require("./../../helpers/ConvertToArr");
 var router = express.Router();
-const sql = require('mssql');
 
-const mssqlConfig = {
-  user: "sa",
-  password: "admin1234",
-  server: "localhost",
-  database: "test",
-  "options": {
-    encrypt: true,
-    "enableArithAbort": true
-  },
-};
-
-router.get('/readfiles', async function (req, res, next) {
-
-  function readFiles(dirname, onFileContent) {
-    fs.readdir(dirname, function (err, filenames) {
-      if (err) {
-        return console.log(err);
+router.get('/', async function (req, res, next) {
+  const brandid = req.query.brandid
+  const type = req.query.type
+  const dirRelativeToPublicFolder = `images/${type}/${brandid}`
+  const dir = path.resolve("./public", dirRelativeToPublicFolder);
+  try {
+    var files = fs.readdirSync(dir)
+  } catch (error) {
+    // console.error(error)
+    return res.status(404).json({ statusCode: 404, errMsg: error })
+  }
+  let images = []
+  if (files) {
+    files.forEach(file => {
+      if (path.extname(file).toLowerCase() === (".jpg" || ".png" || ".jpeg" || ".webp" || ".gif")) {
+        images.push(`/${dirRelativeToPublicFolder}/${file}`)
       }
-      filenames.forEach(function (filename) {
-
-        fs.readFile(dirname + filename, 'utf-8', function (err, content) {
-          if (err) {
-            return console.log(err);
-          }
-          onFileContent(filename, content);
-        });
-      });
-    });
+    })
   }
-
-  readFiles('./public/files/', async function (filename, content) {
-
-    const resObj = combineObj(["transaction_no", "mobile", "amount"], content)
-
-    //save to db
-    const status = await insertDB('test', Object.keys(resObj), Object.values(resObj))
-
-    res.sendStatus(200)
-  }, function (err) {
-    throw err;
-  });
-
-  async function insertDB(db_name, colName, vals) {
-    try {
-      let statement = `insert into ${db_name}.dbo.t_inv
-      (${joinCols(colName)}) values (${joinVal(vals)})`
-      let pool = await sql.connect(mssqlConfig)
-      let result1 = await pool.request().query(statement)
-    } catch (err) {
-      // console.error(err)
-      return ` ${err} DBName: ${db_name} `
-    }
-  }
-
-
-});
+  if (images) {
+    res.statusCode = 200;
+  } else res.send(false)
+  res.json(images);
+})
 
 module.exports = router;
