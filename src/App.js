@@ -21,7 +21,6 @@ const hist = createBrowserHistory();
 function App() {
   return (
     <Router history={hist}>
-      {/* <Router history={hist} basename={"/test"}> */}
       <Switch>
         <Route
           exact

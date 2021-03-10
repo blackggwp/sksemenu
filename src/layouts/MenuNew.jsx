@@ -60,11 +60,11 @@ const MenuNew = (props) => {
       <div style={{ textAlign: '-webkit-center' }}>
         {pic ?
           pic.map((pic, idx) =>
-            <img key={idx} src={pic.default} alt="img"
+            <img key={idx} src={pic} alt="img"
               style={{ maxWidth: '100%', height: 'auto' }}
               onClick={() => {
                 setIsOpen(true)
-                setCurrentPic(pic.default)
+                setCurrentPic(pic)
               }}
             />)
           :
