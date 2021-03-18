@@ -5,6 +5,7 @@ import { Router, Route, Switch } from "react-router-dom";
 import HomeNew from "layouts/HomeNew";
 import HomeOld from "layouts/Home";
 import Home3 from "layouts/Home3";
+import Manual from "layouts/Manual";
 
 import { pic_pk_nm, pic_pk_ovl, pic_pk_promotion } from "./Menu_Data";
 import Page404 from "layouts/Page404";
@@ -34,6 +35,10 @@ function App() {
         <Route
           path={`${process.env.PUBLIC_URL}/catalogue/:brandid`}
           render={(props) => <Home3 {...props} />}
+        />
+        <Route
+          path={`${process.env.PUBLIC_URL}/manual/:manualId`}
+          render={(props) => <Manual {...props} />}
         />
         <Route component={Page404} />
       </Switch>
