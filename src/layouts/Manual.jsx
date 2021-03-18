@@ -1,9 +1,10 @@
 import React, { useState } from 'react';
 import { useParams } from "react-router-dom";
 import { Document, Page, pdfjs } from "react-pdf";
-// import 'react-pdf/dist/esm/Page/AnnotationLayer.css';
+import 'react-pdf/dist/esm/Page/AnnotationLayer.css';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import Container from '@material-ui/core/Container';
+import Loading from '../components/Loading'
 
 pdfjs.GlobalWorkerOptions.workerSrc = `//cdnjs.cloudflare.com/ajax/libs/pdf.js/${pdfjs.version}/pdf.worker.js`;
 
@@ -41,6 +42,7 @@ function RenderPdf() {
         <Document
           file={`/manual/${manualId}.pdf`}
           onLoadSuccess={onDocumentLoadSuccess}
+          loading={<Loading />}
           options={options}
         >
           {
@@ -48,6 +50,7 @@ function RenderPdf() {
               new Array(numPages),
               (el, index) => (
                 <Page
+                  loading={<Loading />}
                   key={`page_${index + 1}`}
                   pageNumber={index + 1}
                 />
