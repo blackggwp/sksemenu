@@ -4,16 +4,7 @@ import { Router, Route, Switch } from "react-router-dom";
 
 import Home from "./layouts/Home";
 import Page404 from "./layouts/Page404";
-
-// import { pic_pk_nm, pic_pk_ovl, pic_pk_promotion } from "./Menu_Data";
-// import HomeT2 from "./layouts/HomeT2";
-
-// const propsT2 = {
-//   pic_normal: pic_pk_nm,
-//   pic_ovl: pic_pk_ovl,
-//   pic_promotion: pic_pk_promotion,
-//   headerText: "Tier2",
-// };
+import Manual from "./layouts/Manual";
 
 const hist = createBrowserHistory();
 
@@ -29,6 +20,10 @@ function App() {
         <Route
           path={`${process.env.PUBLIC_URL}/:brandtype/:brandid`}
           render={(props) => <Home {...props} />}
+        />
+        <Route
+          path={`${process.env.PUBLIC_URL}/manual/:manualId`}
+          render={(props) => <Manual {...props} />}
         />
         <Route component={Page404} />
       </Switch>
