@@ -26,21 +26,21 @@ export default function Manual() {
 }
 
 function RenderPdf() {
-  const [numPages, setNumPages] = useState(null);
-  let { manualId } = useParams();
+  const [numPages, setNumPages] = useState<number>(1);
+  let { manualid } = useParams<RouteParamTypes>();
 
-  function onDocumentLoadSuccess({ numPages: nextNumPages }) {
-    setNumPages(nextNumPages);
+  function onDocumentLoadSuccess(pdf: pdfjs.PDFDocumentProxy) {
+    setNumPages(pdf.numPages);
   }
 
   return (
-    <div style={{ textAlign: '-webkit-center' }}>
+    <div style={{ textAlign: 'center' }}>
       <header>
-        <h1>{`${manualId}`.toUpperCase()}</h1>
+        <h1>{`${manualid}`.toUpperCase()}</h1>
       </header>
       <div className="Example__container__document">
         <Document
-          file={`/manual/${manualId}.pdf`}
+          file={`/manual/${manualid}.pdf`}
           onLoadSuccess={onDocumentLoadSuccess}
           loading={<Loading />}
           options={options}

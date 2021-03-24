@@ -5,9 +5,10 @@ interface MenuProps {
   brandtype: string;
 }
 
-interface ParamTypes {
+interface RouteParamTypes {
   brandid: string;
   brandtype: string;
+  manualid: string;
 }
 
 interface GlobalTypes {

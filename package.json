@@ -8,6 +8,7 @@
     "@types/jest": "^26.0.20",
     "@types/node": "^14.14.31",
     "@types/react-dom": "^17.0.1",
+    "@types/react-pdf": "^5.0.1",
     "@types/react-router-dom": "^5.1.7",
     "antd-mobile": "^2.3.3",
     "axios": "^0.21.1",

@@ -18,12 +18,12 @@ function App() {
           render={(props) => <HomeT2 forRender={propsT2} {...props} />}
         /> */}
         <Route
-          path={`${process.env.PUBLIC_URL}/:brandtype/:brandid`}
-          render={(props) => <Home {...props} />}
+          path={`${process.env.PUBLIC_URL}/manual/:manualid`}
+          render={(props) => <Manual {...props} />}
         />
         <Route
-          path={`${process.env.PUBLIC_URL}/manual/:manualId`}
-          render={(props) => <Manual {...props} />}
+          path={`${process.env.PUBLIC_URL}/:brandtype/:brandid`}
+          render={(props) => <Home {...props} />}
         />
         <Route component={Page404} />
       </Switch>

@@ -53,7 +53,7 @@ const useStyles = makeStyles((theme: Theme) => ({
 
 const Home: React.FC = () => {
   const classes = useStyles();
-  let { brandid, brandtype } = useParams<ParamTypes>();
+  let { brandid, brandtype } = useParams<RouteParamTypes>();
   const [value, setValue] = useState('ovl');
   const [isS81, setIsS81] = useState(false);
   const [data, setData] = useState([]);
