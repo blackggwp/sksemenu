@@ -1,17 +1,7 @@
-import React, { useState } from 'react';
-import { useParams } from "react-router-dom";
-import { Document, Page, pdfjs } from "react-pdf";
-import 'react-pdf/dist/esm/Page/AnnotationLayer.css';
+import React from 'react';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import Container from '@material-ui/core/Container';
-import Loading from '../components/Loading'
-
-pdfjs.GlobalWorkerOptions.workerSrc = `//cdnjs.cloudflare.com/ajax/libs/pdf.js/${pdfjs.version}/pdf.worker.js`;
-
-const options = {
-  cMapUrl: 'cmaps/',
-  cMapPacked: true,
-};
+import RenderPdf from './RenderPdf';
 
 export default function Manual() {
 
@@ -22,43 +12,5 @@ export default function Manual() {
         <RenderPdf />
       </Container>
     </>
-  );
-}
-
-function RenderPdf() {
-  const [numPages, setNumPages] = useState<number>(1);
-  let { manualid } = useParams<RouteParamTypes>();
-
-  function onDocumentLoadSuccess(pdf: pdfjs.PDFDocumentProxy) {
-    setNumPages(pdf.numPages);
-  }
-
-  return (
-    <div style={{ textAlign: 'center' }}>
-      <header>
-        <h1>{`${manualid}`.toUpperCase()}</h1>
-      </header>
-      <div className="Example__container__document">
-        <Document
-          file={`/manual/${manualid}.pdf`}
-          onLoadSuccess={onDocumentLoadSuccess}
-          loading={<Loading />}
-          options={options}
-        >
-          {
-            Array.from(
-              new Array(numPages),
-              (el, index) => (
-                <Page
-                  loading={<Loading />}
-                  key={`page_${index + 1}`}
-                  pageNumber={index + 1}
-                />
-              ),
-            )
-          }
-        </Document>
-      </div>
-    </div>
   );
 }
