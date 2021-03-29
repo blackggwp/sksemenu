@@ -13,9 +13,6 @@ import "devextreme/dist/css/dx.light.css";
 
 export default function DataGridDevExtreme(props) {
   return (<DataGrid
-    style={{
-      fontFamily: 'cursive',
-    }}
     dataSource={props.data}
     allowColumnReordering={true}
     showBorders={true}

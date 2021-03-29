@@ -6,17 +6,29 @@ import Home from "./layouts/Home";
 import Page404 from "./layouts/Page404";
 import Manual from "./layouts/Manual";
 import Pos from "./layouts/Pos";
+import PosAuth from "./layouts/PosAuth";
+import PrivateRoute from "./helpers/PrivateRoute";
 
 const hist = createBrowserHistory();
+
 
 function App() {
   return (
     <Router history={hist}>
       <Switch>
-        <Route
-          path={`${process.env.PUBLIC_URL}/pos`}
+        <PrivateRoute
+          path='/pos'
+          isAuthenticated={false}
           component={Pos}
         />
+        <Route
+          path={`${process.env.PUBLIC_URL}/auth`}
+          component={PosAuth}
+        />
+        {/* <Route
+          path={`${process.env.PUBLIC_URL}/pos`}
+          component={Pos}
+        /> */}
         <Route
           path={`${process.env.PUBLIC_URL}/manual/:manualid`}
           component={Manual}

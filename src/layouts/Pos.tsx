@@ -8,6 +8,8 @@ import Brand from '../components/Brand';
 import "../assets/css/index.css";
 import { ThemeProvider, createMuiTheme } from '@material-ui/core/styles';
 import { GLOBAL } from '../config'
+import { Button } from '@material-ui/core';
+import { useHistory } from 'react-router';
 
 interface TabPanelProps {
   children?: React.ReactNode;
@@ -64,6 +66,9 @@ const useStyles = makeStyles((theme: Theme) => ({
     flexGrow: 1,
     backgroundColor: theme.palette.background.paper,
   },
+  submit: {
+    margin: theme.spacing(3, 0, 2),
+  },
 }));
 
 const theme = createMuiTheme({
@@ -81,6 +86,15 @@ export default function Pos() {
   const handleChange = (event: React.ChangeEvent<{}>, newValue: number) => {
     setValue(newValue);
   };
+  let history = useHistory();
+
+  const handleLogout = async (e: React.MouseEvent<HTMLElement>) => {
+    e.preventDefault();
+    localStorage.removeItem('isLogin')
+    return (
+      history.push('/auth')
+    )
+  }
 
   return (
     <ThemeProvider theme={theme}>
@@ -96,6 +110,19 @@ export default function Pos() {
             (
               <LinkTab key={idx} label={brand} {...a11yProps(idx)} />
             ))}
+
+            <Button
+              variant="contained"
+              style={{
+                maxWidth: '100px'
+              }}
+              color="secondary"
+              className={classes.submit}
+              onClick={(e) => handleLogout(e)}
+            >
+              Logout
+          </Button>
+
           </Tabs>
         </AppBar>
 
