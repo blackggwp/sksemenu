@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import "react-image-gallery/styles/css/image-gallery.css";
 import Lightbox from 'react-image-lightbox';
 import 'react-image-lightbox/style.css';
-import { global } from '../config';
+import { GLOBAL } from '../config';
 
 const Menu: React.FC<ImageProps> = ({ imgUrl }) => {
   const [currentPic, setCurrentPic] = useState('');
@@ -15,7 +15,7 @@ const Menu: React.FC<ImageProps> = ({ imgUrl }) => {
           pic.map((pic, idx) =>
             <img key={idx}
 
-              src={`${global.apiServer}${pic}`}
+              src={`${GLOBAL.API_URL}${pic}`}
               alt={pic}
               style={{ maxWidth: '100%', height: 'auto' }}
               onClick={() => {
@@ -35,7 +35,7 @@ const Menu: React.FC<ImageProps> = ({ imgUrl }) => {
     <>
       {isOpen && (
         <Lightbox
-          mainSrc={`${global.apiServer}${currentPic}`}
+          mainSrc={`${GLOBAL.API_URL}${currentPic}`}
           onCloseRequest={() => setIsOpen(false)}
         />
       )}

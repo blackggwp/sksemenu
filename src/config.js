@@ -1,4 +1,4 @@
-export const global = {
+export const GLOBAL = {
   i18n: {
     welcome: {
       en: "Welcome",
@@ -6,6 +6,6 @@ export const global = {
     }
     // rest of your translation object
   },
-  apiServer: "https://www.sukishidelivery.com/api/"
-  // other global config variables you wish
+  API_URL: "https://www.sukishidelivery.com/api/",
+  BRANDS: ["posdb", "nposdbpk", "pos_bf2", "sg_posdb", "wawacha2_posdb"]
 };

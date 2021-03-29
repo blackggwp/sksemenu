@@ -8,7 +8,7 @@ import Box from '@material-ui/core/Box';
 import Menu from './Menu';
 import { useParams } from 'react-router-dom';
 import Axios from 'axios';
-import { global } from '../config';
+import { GLOBAL } from '../config';
 import Page404 from './Page404';
 
 interface TabPanelProps {
@@ -61,9 +61,9 @@ const Home: React.FC = () => {
 
   let initialUrl = ''
   if (brandtype === 'catalogue') {
-    initialUrl = `${global.apiServer}readfiles?brandid=${brandid}-${value}&type=${brandtype}`
+    initialUrl = `${GLOBAL.API_URL}readfiles?brandid=${brandid}-${value}&type=${brandtype}`
   } else {
-    initialUrl = `${global.apiServer}readfiles?brandid=${brandid}&type=${brandtype}`
+    initialUrl = `${GLOBAL.API_URL}readfiles?brandid=${brandid}&type=${brandtype}`
   }
   const [fetchUrl, setFetchUrl] = useState(initialUrl);
 
@@ -84,13 +84,13 @@ const Home: React.FC = () => {
     if (brandid === 'bq-huahin') {
       setIsS81(true)
       setValue("alc")
-      setFetchUrl(`${global.apiServer}readfiles?brandid=${brandid}-alc&type=${brandtype}`)
+      setFetchUrl(`${GLOBAL.API_URL}readfiles?brandid=${brandid}-alc&type=${brandtype}`)
     }
   }, [brandid, brandtype])
 
   const handleChange = (event: React.ChangeEvent<{}>, newValue: string) => {
     setValue(newValue);
-    setFetchUrl(`${global.apiServer}readfiles?brandid=${brandid}-${newValue}&type=${brandtype}`)
+    setFetchUrl(`${GLOBAL.API_URL}readfiles?brandid=${brandid}-${newValue}&type=${brandtype}`)
   };
 
   return (
