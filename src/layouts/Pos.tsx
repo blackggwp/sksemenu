@@ -6,7 +6,6 @@ import Tab from '@material-ui/core/Tab';
 import Box from '@material-ui/core/Box';
 import Brand from '../components/Brand';
 import "../assets/css/index.css";
-import { ThemeProvider, createMuiTheme } from '@material-ui/core/styles';
 import { GLOBAL } from '../config'
 import { Button } from '@material-ui/core';
 import { useHistory } from 'react-router';
@@ -71,15 +70,6 @@ const useStyles = makeStyles((theme: Theme) => ({
   },
 }));
 
-const theme = createMuiTheme({
-  typography: {
-    fontFamily: [
-      'Sriracha',
-      'cursive',
-    ].join(','),
-  },
-});
-
 export default function Pos() {
   const classes = useStyles();
   const [value, setValue] = React.useState(0);
@@ -97,44 +87,41 @@ export default function Pos() {
   }
 
   return (
-    <ThemeProvider theme={theme}>
-      <div className={classes.root} >
-        <AppBar position="static">
-          <Tabs
-            variant="fullWidth"
-            value={value}
-            onChange={handleChange}
-            aria-label="nav tabs example"
-          >
-            {GLOBAL.BRANDS.map((brand, idx) =>
-            (
-              <LinkTab key={idx} label={brand} {...a11yProps(idx)} />
-            ))}
-
-            <Button
-              variant="contained"
-              style={{
-                maxWidth: '100px'
-              }}
-              color="secondary"
-              className={classes.submit}
-              onClick={(e) => handleLogout(e)}
-            >
-              Logout
-          </Button>
-
-          </Tabs>
-        </AppBar>
-
-        {GLOBAL.BRANDS.map((brand, idx) =>
-        (
-          <TabPanel key={idx} index={idx} value={value}>
-            <Brand brandID={brand} />
-          </TabPanel>
-        )
-        )
-        }
-      </div>
-    </ThemeProvider>
+    <div className={classes.root} >
+      <AppBar position="static">
+        <Tabs
+          variant="scrollable"
+          value={value}
+          onChange={handleChange}
+          aria-label="nav tabs example"
+        >
+          {GLOBAL.BRANDS.map((brand, idx) =>
+          (
+            <LinkTab key={idx} label={brand} {...a11yProps(idx)} />
+          ))}
+        </Tabs>
+      </AppBar>
+      <Button
+        variant="contained"
+        style={{
+          maxWidth: '100px',
+          position: 'absolute',
+          top: 40,
+          right: 10,
+          margin: '20px 0px 20px 0px'
+        }}
+        color="secondary"
+        className={classes.submit}
+        onClick={(e) => handleLogout(e)}
+      >
+        Logout
+      </Button>
+      {GLOBAL.BRANDS.map((brand, idx) =>
+      (
+        <TabPanel key={idx} index={idx} value={value}>
+          <Brand brandID={brand} />
+        </TabPanel>
+      ))}
+    </div>
   );
 }

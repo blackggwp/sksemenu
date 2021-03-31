@@ -20,7 +20,8 @@ export default function DataGridDevExtreme(props) {
     columnAutoWidth
     height={'40rem'}
   >
-    <GroupPanel visible={true} />
+    <GroupPanel visible={true}
+      emptyPanelText='' />
     <Grouping autoExpandAll={false} />
     <SearchPanel visible={true} height={10} />
     <Paging defaultPageSize={20} />
