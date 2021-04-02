@@ -23,7 +23,7 @@ export const useApiRequest = (url: string): IApiResponses => {
           method: "get",
           url: url,
           cancelToken: source.token,
-          timeout: 1000 * 15, // Wait for 15 seconds
+          timeout: 1000 * 20, // Wait for 20 seconds
           onDownloadProgress: (progressEvent) => {
             let percentCompleted = Math.floor(
               (progressEvent.loaded / progressEvent.total) * 100

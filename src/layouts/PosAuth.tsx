@@ -48,7 +48,7 @@ export default function SignIn() {
   function checkPassword(password: string) {
     if (password === "88888888") {
       localStorage.setItem("isLogin", "true");
-      return history.push("/pos");
+      return history.push("/pos/posdb");
     } else {
       alert("Wrong password");
     }

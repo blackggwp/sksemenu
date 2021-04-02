@@ -1,9 +1,10 @@
 import React from "react";
 import { useApiRequest } from "../helpers/utils";
 import DataGridDevExtreme from "../components/DataGridDevExtreme";
-import { GLOBAL } from '../config'
+import { GLOBAL } from "../config";
 import Loading from "../components/Loading";
-import ProgressBar from '../components/ProgressBar'
+import ProgressBar from "../components/ProgressBar";
+import { Chip } from "@material-ui/core";
 
 interface BrandProps {
   brandID: string;
@@ -15,10 +16,13 @@ export default function Brand({ brandID }: BrandProps) {
 
   return (
     <>
-      <div style={{
-        margin: '20px 0px 20px 0px',
-        paddingBottom: 20
-      }}>
+      <Chip size="medium" label={brandID} />
+      <div
+        style={{
+          margin: "20px 0px 20px 0px",
+          paddingBottom: 20,
+        }}
+      >
         {isLoading && (
           <>
             <ProgressBar value={percentage} />
