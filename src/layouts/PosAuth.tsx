@@ -49,6 +49,8 @@ export default function SignIn() {
     if (password === "88888888") {
       localStorage.setItem("isLogin", "true");
       return history.push("/pos");
+    } else {
+      alert("Wrong password");
     }
   }
 
@@ -60,8 +62,8 @@ export default function SignIn() {
   };
 
   const handleKeyPress = (e: React.KeyboardEvent<HTMLDivElement>) => {
-    e.preventDefault();
     if (e.key === "Enter") {
+      e.preventDefault();
       checkPassword(password);
     }
   };
