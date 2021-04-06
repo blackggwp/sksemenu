@@ -155,11 +155,11 @@ export default function DrawerDemo() {
         <Divider />
         <List>
           {GLOBAL.BRANDS.map((brand, index) => (
-            <ListItem button key={brand}>
-              <Link to={`${url}/${brand}`}>
+            <Link to={`${url}/${brand}`}>
+              <ListItem button key={brand}>
                 <ListItemText primary={brand} onClick={() => setOpen(false)} />
-              </Link>
-            </ListItem>
+              </ListItem>
+            </Link>
           ))}
         </List>
         <Divider />
