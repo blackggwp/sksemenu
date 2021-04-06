@@ -16,9 +16,9 @@ import ListItem from "@material-ui/core/ListItem";
 import ListItemText from "@material-ui/core/ListItemText";
 import { GLOBAL } from "../../config";
 import Brand from "../Brand";
-import { Route, Switch, Link, useRouteMatch } from "react-router-dom";
+import { Route, Switch, Link, useRouteMatch, Redirect } from "react-router-dom";
 import { Button } from "@material-ui/core";
-import { useHistory } from "react-router";
+import { useHistory, useLocation } from "react-router";
 
 const drawerWidth = 240;
 
@@ -88,6 +88,12 @@ export default function DrawerDemo() {
   const [open, setOpen] = React.useState(false);
   let { path, url } = useRouteMatch();
   let history = useHistory();
+  let location = useLocation();
+  const pathName = location.pathname;
+  // catch pos route
+  if (pathName === "/pos" || pathName === "/pos/") {
+    return <Redirect to="/pos/posdb" />;
+  }
 
   const handleDrawerOpen = () => {
     setOpen(true);
@@ -155,8 +161,8 @@ export default function DrawerDemo() {
         <Divider />
         <List>
           {GLOBAL.BRANDS.map((brand, index) => (
-            <Link to={`${url}/${brand}`}>
-              <ListItem button key={brand}>
+            <Link to={`${url}/${brand}`} key={brand}>
+              <ListItem button>
                 <ListItemText primary={brand} onClick={() => setOpen(false)} />
               </ListItem>
             </Link>
