@@ -69,7 +69,7 @@ export default function SignIn() {
   };
 
   return (
-    <Container component="main" maxWidth="xs">
+    <Container component="main" maxWidth="xs" className="ring-1">
       <CssBaseline />
       <div className={classes.paper}>
         <Avatar className={classes.avatar}>
@@ -80,6 +80,7 @@ export default function SignIn() {
         </Typography>
         <form className={classes.form} noValidate>
           <TextField
+            autoFocus={true}
             variant="outlined"
             margin="normal"
             required
@@ -97,7 +98,6 @@ export default function SignIn() {
             fullWidth
             variant="contained"
             color="primary"
-            className={classes.submit}
             onClick={(e) => handleLogin(e)}
           >
             Sign In

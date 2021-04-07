@@ -11,20 +11,12 @@ import PrivateRoute from "./helpers/PrivateRoute";
 
 const hist = createBrowserHistory();
 
-
 function App() {
   return (
     <Router history={hist}>
       <Switch>
-        <PrivateRoute
-          path='/pos'
-          isAuthenticated={false}
-          component={Pos}
-        />
-        <Route
-          path={`${process.env.PUBLIC_URL}/auth`}
-          component={PosAuth}
-        />
+        <PrivateRoute path="/pos" isAuthenticated={false} component={Pos} />
+        <Route path={`${process.env.PUBLIC_URL}/auth`} component={PosAuth} />
         {/* <Route
           path={`${process.env.PUBLIC_URL}/pos`}
           component={Pos}
