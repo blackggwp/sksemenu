@@ -13,9 +13,8 @@ import { useHistory } from "react-router-dom";
 function Copyright() {
   return (
     <Typography variant="body2" color="textSecondary" align="center">
-      Sukishi
+      Sukishi@
       {new Date().getFullYear()}
-      {"."}
     </Typography>
   );
 }
@@ -56,9 +55,7 @@ export default function SignIn() {
 
   const handleLogin = async (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
-    if (password.length > 1) {
-      checkPassword(password);
-    }
+    checkPassword(password);
   };
 
   const handleKeyPress = (e: React.KeyboardEvent<HTMLDivElement>) => {
@@ -69,7 +66,7 @@ export default function SignIn() {
   };
 
   return (
-    <Container component="main" maxWidth="xs" className="ring-1">
+    <Container component="main" maxWidth="xs">
       <CssBaseline />
       <div className={classes.paper}>
         <Avatar className={classes.avatar}>

@@ -1,4 +1,3 @@
-import React from "react";
 import { useApiRequest } from "../helpers/utils";
 import DataGridDevExtreme from "../components/DataGridDevExtreme";
 import { GLOBAL } from "../config";
@@ -15,14 +14,9 @@ export default function Brand({ brandID }: BrandProps) {
   );
 
   return (
-    <>
+    <div>
       <Chip size="medium" label={brandID} />
-      <div
-        style={{
-          margin: "20px 0px 20px 0px",
-          paddingBottom: 20,
-        }}
-      >
+      <div className="my-5 pb-5">
         {isLoading && (
           <>
             <ProgressBar value={percentage} />
@@ -34,6 +28,6 @@ export default function Brand({ brandID }: BrandProps) {
         )}
         {!isLoading && !error && <DataGridDevExtreme data={data} />}
       </div>
-    </>
+    </div>
   );
 }
