@@ -21,12 +21,13 @@ import { Route, Switch, Link, useRouteMatch, Redirect } from "react-router-dom";
 import { Button, createStyles, Grid, withStyles } from "@material-ui/core";
 import { useHistory, useLocation } from "react-router";
 import DarkContext from "../../contexts/DarkContext";
+import LinearProgress from "@material-ui/core/LinearProgress";
 
 const drawerWidth = 240;
 
 const useStyles = makeStyles((theme: Theme) => ({
   root: {
-    display: "flex",
+    flexGrow: 1,
   },
   appBar: {
     transition: theme.transitions.create(["margin", "width"], {
@@ -90,7 +91,6 @@ const AntSwitch = withStyles((theme: Theme) =>
       width: 28,
       height: 16,
       padding: 0,
-      display: "flex",
     },
     switchBase: {
       padding: 2,
@@ -152,8 +152,9 @@ export default function DrawerDemo() {
   return (
     <div className={classes.root}>
       <CssBaseline />
+
       <AppBar
-        position="fixed"
+        position="static"
         className={clsx(classes.appBar, {
           [classes.appBarShift]: open,
         })}
@@ -197,6 +198,7 @@ export default function DrawerDemo() {
           </Button>
         </Toolbar>
       </AppBar>
+      <LinearProgress variant="determinate" value={50} color="secondary" />
       <Drawer
         className={classes.drawer}
         variant="persistent"
@@ -234,13 +236,13 @@ export default function DrawerDemo() {
         })}
       >
         <div className={classes.drawerHeader} />
-        <Switch>
+        {/* <Switch>
           {GLOBAL.BRANDS.map((brand, idx) => (
             <Route path={`${path}/${brand}`} key={brand}>
               <Brand brandID={brand} />
             </Route>
           ))}
-        </Switch>
+        </Switch> */}
       </main>
     </div>
   );

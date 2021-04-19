@@ -2,8 +2,8 @@ import { useApiRequest } from "../helpers/utils";
 import DataGridDevExtreme from "../components/DataGridDevExtreme";
 import { GLOBAL } from "../config";
 import Loading from "../components/Loading";
-import ProgressBar from "../components/ProgressBar";
 import { Chip } from "@material-ui/core";
+import LinearProgress from "@material-ui/core/LinearProgress";
 
 interface BrandProps {
   brandID: string;
@@ -19,7 +19,7 @@ export default function Brand({ brandID }: BrandProps) {
       <div className="my-5 pb-5">
         {isLoading && (
           <>
-            <ProgressBar value={percentage} />
+            <LinearProgress value={percentage} />
             <Loading />
           </>
         )}
