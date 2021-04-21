@@ -10,12 +10,13 @@ import PrivateRoute from "./helpers/PrivateRoute";
 import { createMuiTheme } from "@material-ui/core/styles";
 import { MuiThemeProvider, useMediaQuery } from "@material-ui/core";
 import deepOrange from "@material-ui/core/colors/deepOrange";
-import DarkContext from "./contexts/DarkContext";
+import MyContext from "./contexts/MyContext";
 
 const hist = createBrowserHistory();
 function App() {
   const cliIsDarkMode = localStorage.getItem("isDarkMode");
   const [darkMode, setDarkMode] = useState(cliIsDarkMode ? "dark" : "light");
+  const [percen, setPercen] = useState(0);
   const toggleDarkMode = () => {
     //client
     if (cliIsDarkMode) {
@@ -25,6 +26,20 @@ function App() {
     }
     //component
     setDarkMode(darkMode === "light" ? "dark" : "light");
+  };
+
+  const handlePercen = (value: number) => {
+    setPercen(value);
+  };
+  const context = {
+    dark: {
+      darkMode,
+      toggleDarkMode,
+    },
+    api: {
+      percen: percen,
+      handlePercen,
+    },
   };
 
   const prefersDarkMode = useMediaQuery("(prefers-color-scheme: dark)");
@@ -47,12 +62,7 @@ function App() {
   }, [darkMode, prefersDarkMode]);
 
   return (
-    <DarkContext.Provider
-      value={{
-        darkMode,
-        toggleDarkMode,
-      }}
-    >
+    <MyContext.Provider value={context}>
       <MuiThemeProvider theme={theme}>
         <Router history={hist}>
           <Switch>
@@ -77,7 +87,7 @@ function App() {
           </Switch>
         </Router>
       </MuiThemeProvider>
-    </DarkContext.Provider>
+    </MyContext.Provider>
   );
 }
 

@@ -11,7 +11,7 @@ export const useApiRequest = (url: string): IApiResponses => {
   const [data, setData] = useState();
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(null);
-  const [percentage, setPercentage] = useState(0);
+  const [percentage, handlePercentage] = useState(0);
 
   useEffect(() => {
     const source = Axios.CancelToken.source();
@@ -28,7 +28,7 @@ export const useApiRequest = (url: string): IApiResponses => {
             let percentCompleted = Math.floor(
               (progressEvent.loaded / progressEvent.total) * 100
             );
-            setPercentage(percentCompleted);
+            handlePercentage(percentCompleted);
           },
         });
         setData(data[0]);

@@ -20,70 +20,73 @@ import Brand from "../Brand";
 import { Route, Switch, Link, useRouteMatch, Redirect } from "react-router-dom";
 import { Button, createStyles, Grid, withStyles } from "@material-ui/core";
 import { useHistory, useLocation } from "react-router";
-import DarkContext from "../../contexts/DarkContext";
+import MyContext from "../../contexts/MyContext";
 import LinearProgress from "@material-ui/core/LinearProgress";
 
 const drawerWidth = 240;
 
-const useStyles = makeStyles((theme: Theme) => ({
-  root: {
-    flexGrow: 1,
-  },
-  appBar: {
-    transition: theme.transitions.create(["margin", "width"], {
-      easing: theme.transitions.easing.sharp,
-      duration: theme.transitions.duration.leavingScreen,
-    }),
-  },
-  appBarShift: {
-    width: `calc(100% - ${drawerWidth}px)`,
-    marginLeft: drawerWidth,
-    transition: theme.transitions.create(["margin", "width"], {
-      easing: theme.transitions.easing.easeOut,
-      duration: theme.transitions.duration.enteringScreen,
-    }),
-  },
-  menuButton: {
-    marginRight: theme.spacing(2),
-  },
-  hide: {
-    display: "none",
-  },
-  drawer: {
-    width: drawerWidth,
-    flexShrink: 0,
-  },
-  drawerPaper: {
-    width: drawerWidth,
-  },
-  drawerHeader: {
-    display: "flex",
-    alignItems: "center",
-    padding: theme.spacing(0, 1),
-    // necessary for content to be below app bar
-    ...theme.mixins.toolbar,
-    justifyContent: "flex-end",
-  },
-  content: {
-    flexGrow: 1,
-    padding: theme.spacing(3),
-    transition: theme.transitions.create("margin", {
-      easing: theme.transitions.easing.sharp,
-      duration: theme.transitions.duration.leavingScreen,
-    }),
-    marginLeft: -drawerWidth,
-  },
-  contentShift: {
-    transition: theme.transitions.create("margin", {
-      easing: theme.transitions.easing.easeOut,
-      duration: theme.transitions.duration.enteringScreen,
-    }),
-    marginLeft: 0,
-  },
-  title: {
-    flexGrow: 1,
-  },
-}));
+const useStyles = makeStyles((theme: Theme) =>
+  createStyles({
+    root: {
+      flexGrow: 1,
+    },
+    appBar: {
+      transition: theme.transitions.create(["margin", "width"], {
+        easing: theme.transitions.easing.sharp,
+        duration: theme.transitions.duration.leavingScreen,
+      }),
+    },
+    appBarShift: {
+      width: `calc(100% - ${drawerWidth}px)`,
+      marginLeft: drawerWidth,
+      transition: theme.transitions.create(["margin", "width"], {
+        easing: theme.transitions.easing.easeOut,
+        duration: theme.transitions.duration.enteringScreen,
+      }),
+    },
+    menuButton: {
+      marginRight: theme.spacing(2),
+    },
+    hide: {
+      display: "none",
+    },
+    drawer: {
+      width: drawerWidth,
+      flexShrink: 0,
+    },
+    drawerPaper: {
+      width: drawerWidth,
+    },
+    drawerHeader: {
+      // display: "flex",
+      // alignItems: "center",
+      // padding: theme.spacing(0, 1),
+      // // necessary for content to be below app bar
+      // ...theme.mixins.toolbar,
+      // justifyContent: "flex-end",
+    },
+    content: {
+      flexGrow: 1,
+      padding: theme.spacing(3),
+      transition: theme.transitions.create("margin", {
+        easing: theme.transitions.easing.sharp,
+        duration: theme.transitions.duration.leavingScreen,
+      }),
+      // marginLeft: -drawerWidth,
+    },
+    contentShift: {
+      transition: theme.transitions.create("margin", {
+        easing: theme.transitions.easing.easeOut,
+        duration: theme.transitions.duration.enteringScreen,
+      }),
+      // marginLeft: 0,
+      marginLeft: drawerWidth,
+    },
+    title: {
+      flexGrow: 1,
+    },
+  })
+);
 
 const AntSwitch = withStyles((theme: Theme) =>
   createStyles({
@@ -128,7 +131,7 @@ export default function DrawerDemo() {
   let history = useHistory();
   let location = useLocation();
   const pathName = location.pathname;
-  const { darkMode, toggleDarkMode } = useContext(DarkContext);
+  const { dark, api } = useContext(MyContext);
 
   // catch pos route
   if (pathName === "/pos" || pathName === "/pos/") {
@@ -179,8 +182,8 @@ export default function DrawerDemo() {
               <Grid item>Off</Grid>
               <Grid item>
                 <AntSwitch
-                  checked={darkMode === "dark"}
-                  onChange={toggleDarkMode}
+                  checked={dark.darkMode === "dark"}
+                  onChange={dark.toggleDarkMode}
                   name="DarkMode"
                   inputProps={{ "aria-label": "secondary checkbox" }}
                 />
@@ -198,7 +201,11 @@ export default function DrawerDemo() {
           </Button>
         </Toolbar>
       </AppBar>
-      <LinearProgress variant="determinate" value={50} color="secondary" />
+      <LinearProgress
+        variant="determinate"
+        value={api.percen}
+        color="secondary"
+      />
       <Drawer
         className={classes.drawer}
         variant="persistent"
@@ -236,13 +243,13 @@ export default function DrawerDemo() {
         })}
       >
         <div className={classes.drawerHeader} />
-        {/* <Switch>
+        <Switch>
           {GLOBAL.BRANDS.map((brand, idx) => (
             <Route path={`${path}/${brand}`} key={brand}>
               <Brand brandID={brand} />
             </Route>
           ))}
-        </Switch> */}
+        </Switch>
       </main>
     </div>
   );
