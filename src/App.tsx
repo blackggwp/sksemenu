@@ -30,6 +30,9 @@ function App() {
 
   const handlePercen = (value: number) => {
     setPercen(value);
+    if (value === 100) {
+      setPercen(0);
+    }
   };
   const context = {
     dark: {
