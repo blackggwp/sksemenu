@@ -1,7 +1,6 @@
 import React, { useContext } from "react";
 import clsx from "clsx";
 import { makeStyles, useTheme, Theme } from "@material-ui/core/styles";
-import { default as SwitchMui } from "@material-ui/core/Switch";
 import Drawer from "@material-ui/core/Drawer";
 import CssBaseline from "@material-ui/core/CssBaseline";
 import AppBar from "@material-ui/core/AppBar";
@@ -18,7 +17,7 @@ import ListItemText from "@material-ui/core/ListItemText";
 import { GLOBAL } from "../../config";
 import Brand from "../Brand";
 import { Route, Switch, Link, useRouteMatch, Redirect } from "react-router-dom";
-import { Button, createStyles, Grid, withStyles } from "@material-ui/core";
+import { Button, createStyles } from "@material-ui/core";
 import { useHistory, useLocation } from "react-router";
 import MyContext from "../../contexts/MyContext";
 import LinearProgress from "@material-ui/core/LinearProgress";
@@ -88,41 +87,6 @@ const useStyles = makeStyles((theme: Theme) =>
   })
 );
 
-const AntSwitch = withStyles((theme: Theme) =>
-  createStyles({
-    root: {
-      width: 28,
-      height: 16,
-      padding: 0,
-    },
-    switchBase: {
-      padding: 2,
-      color: theme.palette.grey[500],
-      "&$checked": {
-        transform: "translateX(12px)",
-        color: theme.palette.common.white,
-        "& + $track": {
-          opacity: 1,
-          backgroundColor: theme.palette.secondary.main,
-          borderColor: theme.palette.secondary.main,
-        },
-      },
-    },
-    thumb: {
-      width: 12,
-      height: 12,
-      boxShadow: "none",
-    },
-    track: {
-      border: `1px solid ${theme.palette.grey[500]}`,
-      borderRadius: 16 / 2,
-      opacity: 1,
-      backgroundColor: theme.palette.common.white,
-    },
-    checked: {},
-  })
-)(SwitchMui);
-
 export default function DrawerDemo() {
   const classes = useStyles();
   const theme = useTheme();
@@ -131,7 +95,7 @@ export default function DrawerDemo() {
   let history = useHistory();
   let location = useLocation();
   const pathName = location.pathname;
-  const { dark, api } = useContext(MyContext);
+  const { api } = useContext(MyContext);
 
   // catch pos route
   if (pathName === "/pos" || pathName === "/pos/") {
@@ -174,22 +138,6 @@ export default function DrawerDemo() {
           </IconButton>
           <Typography variant="h6" className={classes.title}>
             Sukishi POS Menu
-          </Typography>
-
-          <Typography component="div" className="pr-2">
-            <Grid component="label" container alignItems="center" spacing={1}>
-              <Grid item>DarkMode</Grid>
-              <Grid item>Off</Grid>
-              <Grid item>
-                <AntSwitch
-                  checked={dark.darkMode === "dark"}
-                  onChange={dark.toggleDarkMode}
-                  name="DarkMode"
-                  inputProps={{ "aria-label": "secondary checkbox" }}
-                />
-              </Grid>
-              <Grid item>On</Grid>
-            </Grid>
           </Typography>
 
           <Button
