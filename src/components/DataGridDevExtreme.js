@@ -7,7 +7,9 @@ import DataGrid, {
   ColumnChooser,
   ColumnFixing,
   Pager,
+  FilterRow,
 } from "devextreme-react/data-grid";
+import { Scrolling } from "devextreme-react/tree-list";
 import "devextreme/dist/css/dx.common.css";
 import "devextreme/dist/css/dx.light.css";
 
@@ -15,26 +17,28 @@ export default function DataGridDevExtreme(props) {
   return (
     <DataGrid
       dataSource={props.data}
-      allowColumnReordering={true}
-      showBorders={true}
-      allowColumnResizing={true}
+      allowColumnReordering
+      showBorders
+      allowColumnResizing
       columnAutoWidth
-      columnHidingEnabled
+      // columnHidingEnabled
     >
-      <GroupPanel visible={true} emptyPanelText="Group column here" />
+      <Scrolling showScrollbar scrollByThumb useNative />
+      <FilterRow visible />
+      <GroupPanel visible emptyPanelText="Group column here" />
       <Grouping autoExpandAll={false} />
       <Pager
         allowedPageSizes={[10, 30]}
-        showInfo={true}
-        showNavigationButtons={true}
-        showPageSizeSelector={true}
-        visible={true}
+        showInfo
+        showNavigationButtons
+        showPageSizeSelector
+        visible
       />
       <Paging defaultPageSize={10} />
-      <SearchPanel visible={true} height={10} />
-      <Export enabled={true} />
-      <ColumnChooser enabled={true} />
-      <ColumnFixing enabled={true} />
+      <SearchPanel visible height={10} />
+      <Export enabled />
+      <ColumnChooser enabled />
+      <ColumnFixing enabled />
     </DataGrid>
   );
 }
