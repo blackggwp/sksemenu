@@ -13,10 +13,10 @@ import { Scrolling } from "devextreme-react/tree-list";
 import "devextreme/dist/css/dx.common.css";
 import "devextreme/dist/css/dx.light.css";
 
-export default function DataGridDevExtreme(props) {
+export default function DataGridDevExtreme({ data }) {
   return (
     <DataGrid
-      dataSource={props.data}
+      dataSource={data}
       allowColumnReordering
       showBorders
       allowColumnResizing

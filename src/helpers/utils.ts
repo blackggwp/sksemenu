@@ -7,6 +7,15 @@ interface IApiResponses {
   data: {} | undefined;
   percentage: number;
 }
+
+interface DataProps {
+  Fcode: string;
+  FoodType?: {
+    FTnameTh: string;
+  };
+  FTnameTh?: string | undefined;
+}
+
 export const useApiRequest = (url: string): IApiResponses => {
   const [data, setData] = useState();
   const [isLoading, setIsLoading] = useState(false);
@@ -50,4 +59,13 @@ export const useApiRequest = (url: string): IApiResponses => {
   }, [url]);
 
   return { error, isLoading, data, percentage };
+};
+
+export const mapFTnameThProp = (data: Array<DataProps>): Array<DataProps> => {
+  const foodT = data.map((food) => {
+    const combined = { FTNameTh: food?.FoodType?.FTnameTh, ...food };
+    const { FoodType, ...rest } = combined;
+    return rest;
+  });
+  return foodT;
 };

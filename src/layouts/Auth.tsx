@@ -39,7 +39,11 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function SignIn() {
+interface AuthProps {
+  location: { state: string };
+}
+
+const Auth: React.FC<AuthProps> = ({ location }) => {
   const classes = useStyles();
   const [password, setPassword] = useState("");
   let history = useHistory();
@@ -47,7 +51,8 @@ export default function SignIn() {
   function checkPassword(password: string) {
     if (password === "88888888") {
       localStorage.setItem("isLogin", "true");
-      return history.push("/pos/posdb");
+      // return history.push("/pos/posdb");
+      return history.push(location.state);
     } else {
       alert("Wrong password");
     }
@@ -106,4 +111,6 @@ export default function SignIn() {
       </Box>
     </Container>
   );
-}
+};
+
+export default Auth;

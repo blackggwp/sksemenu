@@ -6,13 +6,19 @@ interface PrivateRouteProps {
   component(): any;
   isAuthenticated?: boolean;
 }
-const PrivateRoute = ({ component, isAuthenticated, ...rest }: PrivateRouteProps) => {
-  const isLogin = localStorage.getItem('isLogin')
-  const routeComponent = (props: any) => (
-    isLogin
-      ? React.createElement(component, props)
-      : <Redirect to={{ pathname: '/auth' }} />
-  );
+const PrivateRoute = ({
+  component,
+  isAuthenticated,
+  path,
+  ...rest
+}: PrivateRouteProps) => {
+  const isLogin = localStorage.getItem("isLogin");
+  const routeComponent = (props: any) =>
+    isLogin ? (
+      React.createElement(component, props)
+    ) : (
+      <Redirect to={{ pathname: "/auth", state: path }} />
+    );
   return <Route {...rest} render={routeComponent} />;
 };
 

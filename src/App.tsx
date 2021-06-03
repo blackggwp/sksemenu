@@ -5,12 +5,13 @@ import Home from "./layouts/Home";
 import Page404 from "./layouts/Page404";
 import Manual from "./layouts/Manual";
 import Pos from "./layouts/Pos";
-import PosAuth from "./layouts/PosAuth";
+import Auth from "./layouts/Auth";
 import PrivateRoute from "./helpers/PrivateRoute";
 import { createMuiTheme } from "@material-ui/core/styles";
 import { MuiThemeProvider, useMediaQuery } from "@material-ui/core";
 import deepOrange from "@material-ui/core/colors/deepOrange";
 import MyContext from "./contexts/MyContext";
+import Graphql from "./layouts/Graphql";
 
 const hist = createBrowserHistory();
 function App() {
@@ -70,10 +71,12 @@ function App() {
         <Router history={hist}>
           <Switch>
             <PrivateRoute path="/pos" isAuthenticated={false} component={Pos} />
-            <Route
-              path={`${process.env.PUBLIC_URL}/auth`}
-              component={PosAuth}
+            <PrivateRoute
+              path="/graphql"
+              isAuthenticated={false}
+              component={Graphql}
             />
+            <Route path={`${process.env.PUBLIC_URL}/auth`} component={Auth} />
             {/* <Route
           path={`${process.env.PUBLIC_URL}/pos`}
           component={Pos}
@@ -86,6 +89,7 @@ function App() {
               path={`${process.env.PUBLIC_URL}/:brandtype/:brandid`}
               component={Home}
             />
+            {/* <Route path={`${process.env.PUBLIC_URL}/test`} component={Test} /> */}
             <Route component={Page404} />
           </Switch>
         </Router>
