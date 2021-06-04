@@ -9,9 +9,10 @@ import Auth from "./layouts/Auth";
 import PrivateRoute from "./helpers/PrivateRoute";
 import { createMuiTheme } from "@material-ui/core/styles";
 import { MuiThemeProvider, useMediaQuery } from "@material-ui/core";
-import deepOrange from "@material-ui/core/colors/deepOrange";
+import red from "@material-ui/core/colors/red";
 import MyContext from "./contexts/MyContext";
 import Graphql from "./layouts/Graphql";
+import Feedback from "./layouts/Feedback";
 
 const hist = createBrowserHistory();
 function App() {
@@ -52,14 +53,14 @@ function App() {
     if (darkMode === "dark" || prefersDarkMode) {
       return createMuiTheme({
         palette: {
-          primary: deepOrange,
+          primary: { main: red[600] },
           type: "dark",
         },
       });
     }
     return createMuiTheme({
       palette: {
-        primary: deepOrange,
+        primary: { main: red[600] },
         type: "light",
       },
     });
@@ -84,6 +85,10 @@ function App() {
             <Route
               path={`${process.env.PUBLIC_URL}/manual/:manualid`}
               component={Manual}
+            />
+            <Route
+              path={`${process.env.PUBLIC_URL}/feedback`}
+              component={Feedback}
             />
             <Route
               path={`${process.env.PUBLIC_URL}/:brandtype/:brandid`}
