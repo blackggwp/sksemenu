@@ -12,7 +12,11 @@ import { MuiThemeProvider, useMediaQuery } from "@material-ui/core";
 import red from "@material-ui/core/colors/red";
 import MyContext from "./contexts/MyContext";
 import Graphql from "./layouts/Graphql";
-import Feedback from "./layouts/Feedback";
+import Feedback from "./layouts/Feedback/index";
+// import Charts from "./layouts/charts/ChartsTest";
+// import Themes from "./themes";
+// import { ThemeProvider } from "@material-ui/styles";
+import Report from "./layouts/Feedback/Report";
 
 const hist = createBrowserHistory();
 function App() {
@@ -85,6 +89,10 @@ function App() {
             <Route
               path={`${process.env.PUBLIC_URL}/manual/:manualid`}
               component={Manual}
+            />
+            <Route
+              path={`${process.env.PUBLIC_URL}/feedback/report`}
+              component={Report}
             />
             <Route
               path={`${process.env.PUBLIC_URL}/feedback`}

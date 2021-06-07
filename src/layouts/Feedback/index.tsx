@@ -16,15 +16,15 @@ import { DateTimePicker } from "formik-material-ui-pickers";
 import { MuiPickersUtilsProvider } from "@material-ui/pickers";
 import Box from "@material-ui/core/Box";
 import DateFnsUtils from "@date-io/date-fns";
-import { issueType } from "../assets/issueType";
+import { issueType } from "../../assets/issueType";
 import axios from "axios";
-import { CustomTextInput } from "../components/CustomComponents";
-import HeaderInfo from "../components/HeaderInfo";
+import { CustomTextInput } from "../../components/CustomComponents";
+import HeaderInfo from "../../components/HeaderInfo";
 import * as Yup from "yup";
 import "yup-phone";
 import { Alert, AlertTitle } from "@material-ui/lab";
-import "../assets/css/feedback.css";
-import { GLOBAL } from "../config";
+import "../../assets/css/feedback.css";
+import { GLOBAL } from "../../config";
 
 interface OutletOptions {
   outletCode: string;

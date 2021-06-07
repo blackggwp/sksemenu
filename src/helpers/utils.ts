@@ -2,9 +2,9 @@ import Axios from "axios";
 import { useEffect, useState } from "react";
 
 interface IApiResponses {
-  error: {} | null;
+  error: object | null;
   isLoading: boolean;
-  data: {} | undefined;
+  data: object[] | undefined;
   percentage: number;
 }
 
@@ -40,9 +40,9 @@ export const useApiRequest = (url: string): IApiResponses => {
             handlePercentage(percentCompleted);
           },
         });
-        setData(data[0]);
+        setData(data);
         setIsLoading(false);
-      } catch (error) {
+      } catch (error: any) {
         if (Axios.isCancel(error)) {
         } else {
           console.error("fetchData Error: ", error);
@@ -57,7 +57,6 @@ export const useApiRequest = (url: string): IApiResponses => {
       source.cancel();
     };
   }, [url]);
-
   return { error, isLoading, data, percentage };
 };
 
@@ -68,4 +67,13 @@ export const mapFTnameThProp = (data: Array<DataProps>): Array<DataProps> => {
     return rest;
   });
   return foodT;
+};
+
+export const groupCount = (arr: object[] | undefined, key: string) => {
+  if (!arr) return;
+  const obj = arr.reduce((total: any, value: any) => {
+    total[value[key]] = (total[value[key]] || 0) + 1;
+    return total;
+  }, {});
+  return obj;
 };
