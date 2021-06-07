@@ -8,6 +8,11 @@ export default function PieChart({ data, labels }) {
       chart: {
         width: 380,
         type: "pie",
+        fontFamily: "Itim, Helvetica, Arial",
+      },
+      legend: {
+        fontSize: "20px",
+        fontWeight: 400,
       },
       labels: labels,
       responsive: [
@@ -32,7 +37,7 @@ export default function PieChart({ data, labels }) {
         options={initChart.options}
         series={initChart.series}
         type="pie"
-        width={380}
+        width={480}
       />
     </div>
   );

@@ -51,8 +51,9 @@ const Auth: React.FC<AuthProps> = ({ location }) => {
   function checkPassword(password: string) {
     if (password === "88888888") {
       localStorage.setItem("isLogin", "true");
-      // return history.push("/pos/posdb");
-      return history.push(location.state);
+      return location.state
+        ? history.push(location.state)
+        : history.push("/pos");
     } else {
       alert("Wrong password");
     }

@@ -12,15 +12,22 @@ export default function BarChart({ data, labels }) {
       chart: {
         type: "bar",
         height: 350,
+        fontFamily: "Itim, Arial, sans-serif",
+      },
+      stroke: {
+        show: true,
+        width: 2,
+        colors: ["transparent"],
+      },
+      dataLabels: {
+        enabled: true,
       },
       plotOptions: {
         bar: {
-          borderRadius: 4,
-          horizontal: true,
+          horizontal: false,
+          columnWidth: "20%",
+          endingShape: "rounded",
         },
-      },
-      dataLabels: {
-        enabled: false,
       },
       xaxis: {
         categories: labels,
@@ -47,7 +54,7 @@ export default function BarChart({ data, labels }) {
         options={initChart.options}
         series={initChart.series}
         type="bar"
-        width={380}
+        width={480}
       />
     </div>
   );

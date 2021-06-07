@@ -113,7 +113,10 @@ export default function DrawerDemo() {
   const handleLogout = async (e: React.MouseEvent<HTMLElement>) => {
     e.preventDefault();
     localStorage.removeItem("isLogin");
-    return history.push("/auth");
+    return history.push({
+      pathname: "/auth",
+      state: location,
+    });
   };
 
   return (
