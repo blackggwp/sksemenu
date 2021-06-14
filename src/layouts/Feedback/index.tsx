@@ -16,9 +16,12 @@ import { DateTimePicker } from "formik-material-ui-pickers";
 import { MuiPickersUtilsProvider } from "@material-ui/pickers";
 import Box from "@material-ui/core/Box";
 import DateFnsUtils from "@date-io/date-fns";
-import { issueType } from "../../assets/issueType";
+// import { issueType } from "../../assets/issueType";
 import axios from "axios";
-import { CustomTextInput } from "../../components/CustomComponents";
+import {
+  CustomTextInput,
+  CustomUpload,
+} from "../../components/CustomComponents";
 import HeaderInfo from "../../components/HeaderInfo";
 import * as Yup from "yup";
 import "yup-phone";
@@ -29,6 +32,11 @@ import { GLOBAL } from "../../config";
 interface OutletOptions {
   outletCode: string;
   outletName: string;
+}
+
+interface IssueOptions {
+  id: number;
+  issueType: string;
 }
 
 const styles = {
@@ -47,14 +55,19 @@ const styles = {
 
 const Feedback = () => {
   const [outlets, setOutlets] = useState([]);
+  const [issues, setIssues] = useState([]);
   const [success, setSuccess] = useState(false);
+  const [error, setError] = useState<any | undefined>(undefined);
+  // const [img, setImg] = useState<Array<{ data_url: string }>>();
+  const [img, setImg] = useState<any>();
 
   useEffect(() => {
     async function fetchData() {
       try {
-        const response = await axios(`${GLOBAL.API_URL}feedback/outlets`);
-        // console.log(response.data);
-        setOutlets(response.data);
+        const allOutlets = await axios(`${GLOBAL.API_URL}feedback/outlets`);
+        const allIssues = await axios(`${GLOBAL.API_URL}feedback/issues`);
+        setOutlets(allOutlets.data);
+        setIssues(allIssues.data);
       } catch (error) {
         console.error(error);
       }
@@ -63,23 +76,27 @@ const Feedback = () => {
   }, []);
 
   const initialValues = {
-    feedbackType: "ติ",
-    issueType: "",
+    feedbackType: "ชม",
+    issueTypeId: "",
     firstName: "",
     lastName: "",
     tel: "",
     systemDate: new Date(),
     outletCode: "",
+    serviceType: "",
+    tableCode: "",
+    invoiceImg: "",
     feedbackMessage: "",
   };
   const FeedbackSchema = Yup.object().shape({
     feedbackType: Yup.string().required(),
-    issueType: Yup.string().required(),
+    issueTypeId: Yup.string().required(),
     firstName: Yup.string().max(50, "Too Long!").required("Required"),
     lastName: Yup.string().max(50, "Too Long!").required("Required"),
     systemDate: Yup.date().required("Required"),
     tel: Yup.string().phone("TH").required(),
     outletCode: Yup.string().required(),
+    serviceType: Yup.string().required(),
     feedbackMessage: Yup.string().required(),
   });
 
@@ -91,25 +108,32 @@ const Feedback = () => {
         setSubmitting(true);
         // console.log(values);
         (async () => {
+          let payload = new FormData();
+          payload.append("privateKey", GLOBAL.PRIVATE_KEY);
+          payload.append("invoiceImg", values.invoiceImg);
+
+          for (const [key, value] of Object.entries(values)) {
+            payload.append(key, String(value));
+          }
           try {
-            const response = await axios.post(`${GLOBAL.API_URL}feedback`, {
-              values,
-            });
-            // console.log(response);
+            const response = await axios.post(
+              `${GLOBAL.API_URL}feedback`,
+              payload
+            );
+            console.log(response);
             if (response.status === 200) {
               setSuccess(true);
-              setSubmitting(false);
             }
+            setSubmitting(false);
           } catch (error) {
+            setError(error);
+            setSubmitting(false);
             console.error(error);
           }
         })();
-        // setTimeout(async () => {
-        //   alert(JSON.stringify(values, null, 2));
-        // }, 500);
       }}
     >
-      {({ submitForm, isSubmitting, touched, errors }) => (
+      {({ submitForm, isSubmitting, touched, errors, setFieldValue }) => (
         <Container maxWidth="md" className="feedbackPage">
           <HeaderInfo />
           <MuiPickersUtilsProvider utils={DateFnsUtils}>
@@ -131,15 +155,6 @@ const Feedback = () => {
                         style={styles.radio}
                         type="radio"
                         name="feedbackType"
-                        value="ติ"
-                      />
-                      ติ
-                    </label>
-                    <label style={styles.radioLabel}>
-                      <Field
-                        style={styles.radio}
-                        type="radio"
-                        name="feedbackType"
                         value="ชม"
                       />
                       ชม
@@ -153,6 +168,15 @@ const Feedback = () => {
                       />
                       แนะนำ
                     </label>
+                    <label style={styles.radioLabel}>
+                      <Field
+                        style={styles.radio}
+                        type="radio"
+                        name="feedbackType"
+                        value="ติ"
+                      />
+                      ติ
+                    </label>
                   </RadioGroup>
                 </FormControl>
               </Box>
@@ -162,7 +186,7 @@ const Feedback = () => {
                   component={TextField}
                   defaultValue=""
                   type="text"
-                  name="issueType"
+                  name="issueTypeId"
                   label="เรื่องที่ต้องการติดต่อ"
                   select
                   fullWidth
@@ -173,13 +197,12 @@ const Feedback = () => {
                   //   shrink: true,
                   // }}
                 >
-                  {issueType.map((option) => (
+                  {issues.map((option: IssueOptions) => (
                     <MenuItem
                       key={option.id}
-                      // value={option.title}>
-                      value={option.title ? option.title : ""}
+                      value={option.id ? option.id : ""}
                     >
-                      {option.title}
+                      {option.issueType}
                     </MenuItem>
                   ))}
                 </Field>
@@ -208,7 +231,8 @@ const Feedback = () => {
                 <Field
                   required
                   component={CustomTextInput}
-                  type="number"
+                  type="text"
+                  pattern="[0-9]*"
                   label="กรอกเบอร์โทรติดต่อ"
                   name="tel"
                   helperText="เบอร์โทรติดต่อ"
@@ -260,6 +284,54 @@ const Feedback = () => {
                   ))}
                 </Field>
               </Box>
+
+              <Box margin={1}>
+                <Field
+                  required
+                  component={TextField}
+                  defaultValue=""
+                  type="text"
+                  name="serviceType"
+                  label="รูปแบบการใช้บริการ"
+                  select
+                  variant="outlined"
+                  fullWidth
+                  helperText="Please select service"
+                  margin="normal"
+                >
+                  {["ทานที่ร้าน", "ซื้อกลับบ้าน", "สั่งแบบส่งถึงบ้าน"].map(
+                    (option, idx: number) => (
+                      <MenuItem
+                        key={idx}
+                        // value={option.title}>
+                        value={option ? option : ""}
+                      >
+                        {option}
+                      </MenuItem>
+                    )
+                  )}
+                </Field>
+              </Box>
+              <Box margin={1}>
+                <Field
+                  component={TextField}
+                  name="tableCode"
+                  type="text"
+                  label="กรอกเบอร์โต๊ะ"
+                />
+              </Box>
+              <Box margin={1}>
+                <p>แนบรูปใบเสร็จ</p>
+                <Field
+                  component={CustomUpload}
+                  setFieldValue={setFieldValue}
+                  setImg={setImg}
+                  name="invoiceImg"
+                  disabled={success}
+                  label="แนบรูปใบเสร็จ"
+                />
+                {img && <img src={img} alt="" width="100" />}
+              </Box>
               <Box margin={1}>
                 <Field
                   required
@@ -282,13 +354,18 @@ const Feedback = () => {
                 }}
               >
                 {isSubmitting && <LinearProgress />}
+
                 {success ? (
                   <Collapse in={success}>
                     <Alert severity="success">
                       <AlertTitle>Submit form Success</AlertTitle>
-                      {/* This is a success alert — <strong>check it out!</strong> */}
                     </Alert>
                   </Collapse>
+                ) : error ? (
+                  <Alert severity="error">
+                    <AlertTitle>Something went wrong!</AlertTitle>
+                    Please contact admin.
+                  </Alert>
                 ) : (
                   <Button
                     size="large"

@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 interface IApiResponses {
   error: object | null;
   isLoading: boolean;
-  data: object[] | undefined;
+  data: any;
   percentage: number;
 }
 

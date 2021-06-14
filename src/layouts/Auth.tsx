@@ -9,6 +9,7 @@ import Typography from "@material-ui/core/Typography";
 import { makeStyles } from "@material-ui/core/styles";
 import Container from "@material-ui/core/Container";
 import { useHistory } from "react-router-dom";
+import { GLOBAL } from "../config";
 
 function Copyright() {
   return (
@@ -49,7 +50,7 @@ const Auth: React.FC<AuthProps> = ({ location }) => {
   let history = useHistory();
 
   function checkPassword(password: string) {
-    if (password === "88888888") {
+    if (password === GLOBAL.TEMP_ADMIN_PASS) {
       localStorage.setItem("isLogin", "true");
       return location.state
         ? history.push(location.state)
