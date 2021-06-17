@@ -30,8 +30,9 @@ import "../../assets/css/feedback.css";
 import { GLOBAL } from "../../config";
 
 interface OutletOptions {
-  outletCode: string;
-  outletName: string;
+  outletId: number;
+  store: string;
+  brand: string;
 }
 
 interface IssueOptions {
@@ -66,6 +67,7 @@ const Feedback = () => {
       try {
         const allOutlets = await axios(`${GLOBAL.API_URL}feedback/outlets`);
         const allIssues = await axios(`${GLOBAL.API_URL}feedback/issues`);
+        // console.log(allOutlets);
         setOutlets(allOutlets.data);
         setIssues(allIssues.data);
       } catch (error) {
@@ -82,7 +84,7 @@ const Feedback = () => {
     lastName: "",
     tel: "",
     systemDate: new Date(),
-    outletCode: "",
+    outletId: "",
     serviceType: "",
     tableCode: "",
     invoiceImg: "",
@@ -95,7 +97,7 @@ const Feedback = () => {
     lastName: Yup.string().max(50, "Too Long!").required("Required"),
     systemDate: Yup.date().required("Required"),
     tel: Yup.string().phone("TH").required(),
-    outletCode: Yup.string().required(),
+    outletId: Yup.string().required(),
     serviceType: Yup.string().required(),
     feedbackMessage: Yup.string().required(),
   });
@@ -157,7 +159,7 @@ const Feedback = () => {
                         name="feedbackType"
                         value="ชม"
                       />
-                      ชม
+                      <Typography variant="caption">ชม</Typography>
                     </label>
                     <label style={styles.radioLabel}>
                       <Field
@@ -166,7 +168,7 @@ const Feedback = () => {
                         name="feedbackType"
                         value="แนะนำ"
                       />
-                      แนะนำ
+                      <Typography variant="caption">แนะนำ</Typography>
                     </label>
                     <label style={styles.radioLabel}>
                       <Field
@@ -175,7 +177,7 @@ const Feedback = () => {
                         name="feedbackType"
                         value="ติ"
                       />
-                      ติ
+                      <Typography variant="caption">ติ</Typography>
                     </label>
                   </RadioGroup>
                 </FormControl>
@@ -239,7 +241,7 @@ const Feedback = () => {
                 />
               </Box>
               <Box margin={2}>
-                <Typography component="h4">วัน / เวลาที่ใช้บริการ</Typography>
+                <Typography component="h4">วัน / เวลาที่ใช้บริการ *</Typography>
                 <Field
                   required
                   disableFuture
@@ -262,7 +264,7 @@ const Feedback = () => {
                   component={TextField}
                   defaultValue=""
                   type="text"
-                  name="outletCode"
+                  name="outletId"
                   label="สาขาที่ใช้บริการ"
                   select
                   variant="outlined"
@@ -273,13 +275,13 @@ const Feedback = () => {
                   //   shrink: true,
                   // }}
                 >
-                  {outlets.map((option: OutletOptions) => (
+                  {outlets.map((option: OutletOptions, idx: number) => (
                     <MenuItem
-                      key={option.outletCode}
+                      key={idx}
                       // value={option.title}>
-                      value={option.outletCode ? option.outletCode : ""}
+                      value={option.outletId ? option.outletId : ""}
                     >
-                      {option.outletName}
+                      {`${option.brand} ${option.store}`}
                     </MenuItem>
                   ))}
                 </Field>
@@ -358,7 +360,10 @@ const Feedback = () => {
                 {success ? (
                   <Collapse in={success}>
                     <Alert severity="success">
-                      <AlertTitle>Submit form Success</AlertTitle>
+                      <AlertTitle>
+                        ขอบคุณสำหรับข้อเสนอแนะ ติ ชม
+                        ได้จัดส่งข้อมูลของท่านเรียบร้อยแล้ว
+                      </AlertTitle>
                     </Alert>
                   </Collapse>
                 ) : error ? (

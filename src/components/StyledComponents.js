@@ -14,7 +14,7 @@ export const StyledTextBox = styled.input`
   ${(props) =>
     props.errors &&
     css`
-      border: red 2px solid;
+      border: red 1px solid;
       color: red;
     `}
 `;

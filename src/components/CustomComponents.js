@@ -7,15 +7,20 @@ export const CustomTextInput = ({
   form: { touched, errors }, // also values, setXXXX, handleXXXX, dirty, isValid, status, etc.
   helperText,
   label,
+  required,
   ...props
 }) => (
   <div>
     <Typography variant="inherit" component="h3">
-      {helperText}
+      {helperText}{" "}
+      <span style={{ color: "red" }}>{`${required ? "*" : ""}`}</span>
     </Typography>
     <StyledTextBox
       type="text"
       placeholder={label}
+      // placeholder={`${label} ${
+      //   require && <span style={{ color: "red" }}>*</span>
+      // }`}
       errors={touched[field.name] && errors[field.name]}
       {...field}
       {...props}

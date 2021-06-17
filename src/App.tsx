@@ -7,29 +7,16 @@ import Manual from "./layouts/Manual";
 import Pos from "./layouts/Pos";
 import Auth from "./layouts/Auth";
 import PrivateRoute from "./helpers/PrivateRoute";
-import { createMuiTheme } from "@material-ui/core/styles";
-import { MuiThemeProvider, useMediaQuery } from "@material-ui/core";
-import red from "@material-ui/core/colors/red";
 import MyContext from "./contexts/MyContext";
 import Graphql from "./layouts/Graphql";
 import Feedback from "./layouts/Feedback/index";
 import Report from "./layouts/Feedback/Report";
+import { CssBaseline, MuiThemeProvider } from "@material-ui/core";
+import Themes from "./themes";
 
 const hist = createBrowserHistory();
 function App() {
-  const cliIsDarkMode = localStorage.getItem("isDarkMode");
-  const [darkMode, setDarkMode] = useState(cliIsDarkMode ? "dark" : "light");
   const [percen, setPercen] = useState(0);
-  const toggleDarkMode = () => {
-    //client
-    if (cliIsDarkMode) {
-      localStorage.removeItem("isDarkMode");
-    } else {
-      localStorage.setItem("isDarkMode", "true");
-    }
-    //component
-    setDarkMode(darkMode === "light" ? "dark" : "light");
-  };
 
   const handlePercen = (value: number) => {
     setPercen(value);
@@ -38,38 +25,16 @@ function App() {
     }
   };
   const context = {
-    dark: {
-      darkMode,
-      toggleDarkMode,
-    },
     api: {
       percen: percen,
       handlePercen,
     },
   };
 
-  const prefersDarkMode = useMediaQuery("(prefers-color-scheme: dark)");
-
-  const theme = React.useMemo(() => {
-    if (darkMode === "dark" || prefersDarkMode) {
-      return createMuiTheme({
-        palette: {
-          primary: { main: red[600] },
-          type: "dark",
-        },
-      });
-    }
-    return createMuiTheme({
-      palette: {
-        primary: { main: red[600] },
-        type: "light",
-      },
-    });
-  }, [darkMode, prefersDarkMode]);
-
   return (
-    <MyContext.Provider value={context}>
-      <MuiThemeProvider theme={theme}>
+    <MuiThemeProvider theme={Themes.default}>
+      <CssBaseline />
+      <MyContext.Provider value={context}>
         <Router history={hist}>
           <Switch>
             <PrivateRoute path="/pos" isAuthenticated={false} component={Pos} />
@@ -104,8 +69,8 @@ function App() {
             <Route component={Page404} />
           </Switch>
         </Router>
-      </MuiThemeProvider>
-    </MyContext.Provider>
+      </MyContext.Provider>
+    </MuiThemeProvider>
   );
 }
 

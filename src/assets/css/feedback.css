@@ -1,5 +1,10 @@
-@import url("https://fonts.googleapis.com/css2?family=Itim&display=swap");
+/* @import url("https://fonts.googleapis.com/css2?family=Itim&display=swap"); */
+
+@font-face {
+  font-family: db-helvethaicamon;
+  src: url("../fonts/db-helvethaicamon.ttf");
+}
 
 .feedbackPage {
-  font-family: "Itim", cursive;
+  font-family: "db-helvethaicamon", cursive;
 }
