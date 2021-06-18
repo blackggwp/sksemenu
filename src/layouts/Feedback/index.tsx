@@ -10,6 +10,7 @@ import {
   Collapse,
   Typography,
   RadioGroup,
+  withStyles,
 } from "@material-ui/core";
 import { TextField } from "formik-material-ui";
 import { DateTimePicker } from "formik-material-ui-pickers";
@@ -54,12 +55,19 @@ const styles = {
   },
 };
 
+const CssTextField = withStyles({
+  root: {
+    "& .MuiFormHelperText-contained": {
+      fontSize: "0.8rem",
+    },
+  },
+})(TextField);
+
 const Feedback = () => {
   const [outlets, setOutlets] = useState([]);
   const [issues, setIssues] = useState([]);
   const [success, setSuccess] = useState(false);
   const [error, setError] = useState<any | undefined>(undefined);
-  // const [img, setImg] = useState<Array<{ data_url: string }>>();
   const [img, setImg] = useState<any>();
 
   useEffect(() => {
@@ -67,7 +75,6 @@ const Feedback = () => {
       try {
         const allOutlets = await axios(`${GLOBAL.API_URL}feedback/outlets`);
         const allIssues = await axios(`${GLOBAL.API_URL}feedback/issues`);
-        // console.log(allOutlets);
         setOutlets(allOutlets.data);
         setIssues(allIssues.data);
       } catch (error) {
@@ -148,7 +155,12 @@ const Feedback = () => {
                 >
                   <Box margin={1}>
                     <FormLabel component="legend" filled required>
-                      หัวข้อที่ต้องการติดต่อ
+                      <Typography variant="caption" component="span">
+                        หัวข้อที่ต้องการติดต่อ
+                      </Typography>{" "}
+                      <Typography variant="subtitle1" component="span">
+                        Please select topic
+                      </Typography>
                     </FormLabel>
                   </Box>
                   <RadioGroup>
@@ -159,7 +171,12 @@ const Feedback = () => {
                         name="feedbackType"
                         value="ชม"
                       />
-                      <Typography variant="caption">ชม</Typography>
+                      <Typography variant="caption" component="span">
+                        ชม
+                      </Typography>{" "}
+                      <Typography variant="subtitle1" component="span">
+                        Compliment
+                      </Typography>
                     </label>
                     <label style={styles.radioLabel}>
                       <Field
@@ -168,7 +185,12 @@ const Feedback = () => {
                         name="feedbackType"
                         value="แนะนำ"
                       />
-                      <Typography variant="caption">แนะนำ</Typography>
+                      <Typography variant="caption" component="span">
+                        แนะนำ
+                      </Typography>{" "}
+                      <Typography variant="subtitle1" component="span">
+                        Recomendation
+                      </Typography>
                     </label>
                     <label style={styles.radioLabel}>
                       <Field
@@ -177,7 +199,12 @@ const Feedback = () => {
                         name="feedbackType"
                         value="ติ"
                       />
-                      <Typography variant="caption">ติ</Typography>
+                      <Typography variant="caption" component="span">
+                        ติ
+                      </Typography>{" "}
+                      <Typography variant="subtitle1" component="span">
+                        Complaint
+                      </Typography>
                     </label>
                   </RadioGroup>
                 </FormControl>
@@ -185,7 +212,7 @@ const Feedback = () => {
               <Box margin={1}>
                 <Field
                   required
-                  component={TextField}
+                  component={CssTextField}
                   defaultValue=""
                   type="text"
                   name="issueTypeId"
@@ -193,11 +220,8 @@ const Feedback = () => {
                   select
                   fullWidth
                   variant="outlined"
-                  helperText="Please select Issues"
+                  helperText="Please select Issue"
                   margin="normal"
-                  // InputLabelProps={{
-                  //   shrink: true,
-                  // }}
                 >
                   {issues.map((option: IssueOptions) => (
                     <MenuItem
@@ -217,6 +241,7 @@ const Feedback = () => {
                   type="text"
                   label="กรอกชื่อ"
                   helperText="ชื่อ"
+                  enText="Name"
                 />
               </Box>
               <Box margin={1}>
@@ -227,6 +252,7 @@ const Feedback = () => {
                   label="กรอกนามสกุล"
                   name="lastName"
                   helperText="นามสกุล"
+                  enText="Surname"
                 />
               </Box>
               <Box margin={1}>
@@ -238,10 +264,16 @@ const Feedback = () => {
                   label="กรอกเบอร์โทรติดต่อ"
                   name="tel"
                   helperText="เบอร์โทรติดต่อ"
+                  enText="Phone No."
                 />
               </Box>
               <Box margin={2}>
-                <Typography component="h4">วัน / เวลาที่ใช้บริการ *</Typography>
+                <Typography variant="caption" component="span">
+                  วัน / เวลาที่ใช้บริการ
+                </Typography>{" "}
+                <Typography variant="subtitle1" component="span">
+                  Date/Time of issue *
+                </Typography>
                 <Field
                   required
                   disableFuture
@@ -261,7 +293,7 @@ const Feedback = () => {
               <Box margin={1}>
                 <Field
                   required
-                  component={TextField}
+                  component={CssTextField}
                   defaultValue=""
                   type="text"
                   name="outletId"
@@ -269,16 +301,12 @@ const Feedback = () => {
                   select
                   variant="outlined"
                   fullWidth
-                  helperText="Please select Outlet"
+                  helperText="Please select branch *"
                   margin="normal"
-                  // InputLabelProps={{
-                  //   shrink: true,
-                  // }}
                 >
                   {outlets.map((option: OutletOptions, idx: number) => (
                     <MenuItem
                       key={idx}
-                      // value={option.title}>
                       value={option.outletId ? option.outletId : ""}
                     >
                       {`${option.brand} ${option.store}`}
@@ -290,7 +318,7 @@ const Feedback = () => {
               <Box margin={1}>
                 <Field
                   required
-                  component={TextField}
+                  component={CssTextField}
                   defaultValue=""
                   type="text"
                   name="serviceType"
@@ -298,16 +326,12 @@ const Feedback = () => {
                   select
                   variant="outlined"
                   fullWidth
-                  helperText="Please select service"
+                  helperText="Please select service format *"
                   margin="normal"
                 >
                   {["ทานที่ร้าน", "ซื้อกลับบ้าน", "สั่งแบบส่งถึงบ้าน"].map(
                     (option, idx: number) => (
-                      <MenuItem
-                        key={idx}
-                        // value={option.title}>
-                        value={option ? option : ""}
-                      >
+                      <MenuItem key={idx} value={option ? option : ""}>
                         {option}
                       </MenuItem>
                     )
@@ -316,14 +340,14 @@ const Feedback = () => {
               </Box>
               <Box margin={1}>
                 <Field
-                  component={TextField}
+                  component={CssTextField}
                   name="tableCode"
                   type="text"
-                  label="กรอกเบอร์โต๊ะ"
+                  label="กรอกเบอร์โต๊ะ Table No."
+                  enText="Table No."
                 />
               </Box>
               <Box margin={1}>
-                <p>แนบรูปใบเสร็จ</p>
                 <Field
                   component={CustomUpload}
                   setFieldValue={setFieldValue}
@@ -331,21 +355,23 @@ const Feedback = () => {
                   name="invoiceImg"
                   disabled={success}
                   label="แนบรูปใบเสร็จ"
+                  enText="Attach invoice"
                 />
                 {img && <img src={img} alt="" width="100" />}
               </Box>
               <Box margin={1}>
                 <Field
                   required
-                  component={TextField}
+                  component={CssTextField}
                   multiline
                   rows={4}
                   variant="outlined"
                   type="text"
                   fullWidth
-                  label="ข้อความและคำแนะนำ"
+                  label="ข้อความและคำแนะนำ feedback message"
                   name="feedbackMessage"
-                  helperText="Please Enter feedback message"
+                  helperText="ข้อความและคำแนะนำ"
+                  enText="Please enter feedback message *"
                 />
               </Box>
               <Box
@@ -368,8 +394,10 @@ const Feedback = () => {
                   </Collapse>
                 ) : error ? (
                   <Alert severity="error">
-                    <AlertTitle>Something went wrong!</AlertTitle>
-                    Please contact admin.
+                    <AlertTitle>
+                      มีข้อผิดพลาดเกิดขึ้น กรุณาติดต่อแอดมิน
+                    </AlertTitle>
+                    Something went wrong! Please contact admin.
                   </Alert>
                 ) : (
                   <Button
